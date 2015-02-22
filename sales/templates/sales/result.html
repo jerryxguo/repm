@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+caption {
+    text-align: center;
+    margin-bottom: 5px;   
+    font-size: 160%;
+    padding: 5px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center">Real Estate Sales List </h1>
+
+{% if latest_sales_list %}
+    <ul>
+        <table>
+          
+          <tr>
+            <th>Number</th>
+            <th>Project</th>
+            <th>Lot</th>
+            <th>Office</th>
+            <th>Sales</th>
+            <th>Client</th>
+            <th>Solicitor</th>
+            <th>Contract Signed Date</th>
+            <th>Contract Exchanged Date</th>
+          </tr>
+          {% for sale in latest_sales_list%}
+              <tr>
+                <td width="5%">{{forloop.counter}}</td>
+                <td width="5%">{{sale.project}}</td>
+                <td width="5%">{{sale.project_lot}}</td>
+                <td width="5%">{{sale.office}}</td>
+                <td width="5%">{{sale.sales}}</td>
+                <td width="10%">{{sale.client}}</td>
+                
+                <td width="15%" >{{sale.solicitor}}</td>
+                <td width="15%" >{{sale.date_of_contract_signed}}</td>
+                <td width="15%" >{{sale.date_of_contract_received}}</td>
+              </tr>
+          {% endfor %}
+        </table>         
+    </ul>
+{% else %}
+    <p>No sales result is available.</p>
+{% endif %}
+
+</body>
+</html>
