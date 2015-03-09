@@ -65,7 +65,7 @@ class Purchase(models.Model):
     office = models.ForeignKey(Office, blank=True, null=True)
     sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True, blank=True, null=True)
     client = models.ForeignKey(Client, blank=True, null=True)
-    deposit = models.IntegerField(default=0)
+    deposit = models.IntegerField(default=0, null=True)
     solicitor = models.CharField(max_length=40,blank=True)
     date_of_EOI_sent = models.DateField( blank=True, null = True)
     date_of_contract_received = models.DateField( blank=True, null = True)

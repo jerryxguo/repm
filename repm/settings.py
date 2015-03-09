@@ -25,7 +25,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'mysite.log',
+            'filename': 'log.txt',
             'formatter': 'verbose'
         },
     },
@@ -72,7 +72,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sales',
     'import_export',
-    'smart_selects'
+    'smart_selects',
 )
 
 MIDDLEWARE_CLASSES = (

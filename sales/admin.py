@@ -48,7 +48,7 @@ class PurchaseResource(resources.ModelResource):
     class Meta:
         model = Purchase
         #fields = ('id', 'project', 'office','client', 'sales')
-        exclude = ('tyler_commission1', 'tyler_commission2', 'commission1', 'commission2')
+        exclude = ['tyler_commission1', 'tyler_commission2', 'commission1', 'commission2']
      
     project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))
     project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
@@ -93,7 +93,7 @@ class SalesInline(admin.TabularInline):
     extra = 10
         
 
-class OfficeAdmin(ImportExportModelAdmin):
+class OfficeAdmin(admin.ModelAdmin):
     
     fieldsets = [
         ('Office',               {'fields': ['city']}),
@@ -110,7 +110,7 @@ class PropertyInline(admin.TabularInline):
     extra = 10
         
 
-class ProjectAdmin(ImportExportModelAdmin):
+class ProjectAdmin(admin.ModelAdmin):
     
     fieldsets = [
         ('Project',               {'fields': ['name']}),
@@ -122,7 +122,7 @@ admin.site.register(Project,ProjectAdmin)
 #########################################
 #client#       
 
-class ClientAdmin(ImportExportModelAdmin):
+class ClientAdmin(admin.ModelAdmin):
     
     fieldsets = [
         ('Client Info',    {'fields': (('first_name','last_name','email','mobile'),)}),
