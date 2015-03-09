@@ -71,14 +71,14 @@ class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
         ('Property Info',    {'fields': (('project','project_lot'),)}),       
         ('Sales Info',       {'fields': (('office','sales'),)}), 
-        ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
+        ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
         ('Commission Info',  {'fields': (('commission1','commission2'), ('tyler_commission1','tyler_commission2'),)}), 
         ('Others',      {'fields': (('email','note'),('letter1','letter2','letter3'),)}), 
         
     ]
     
-    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission1','commission2', 'tyler_commission1','tyler_commission2','email','note','letter1','letter2','letter3')
-    list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_exchanged','date_of_settlement']
+    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission1','commission2', 'tyler_commission1','tyler_commission2','email','note','letter1','letter2','letter3')
+    list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_unconditional','date_of_settlement']
     search_fields = ['project','sales', 'client', 'office']
     
     resource_class = PurchaseResource

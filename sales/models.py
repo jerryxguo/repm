@@ -40,6 +40,10 @@ class Sales(models.Model):
     office = models.ForeignKey(Office, blank=True, null=True)
     def __unicode__(self):
         return self.last_name + ','+ self.first_name
+    def _get_full_name(self):
+        "Returns the person's full name."
+        return '%s %s' % (self.first_name, self.last_name)
+    full_name = property(_get_full_name)
 
 class Client(models.Model):
     first_name = models.CharField(max_length=20)
@@ -50,7 +54,10 @@ class Client(models.Model):
     def __unicode__(self):
         return self.last_name + ','+ self.first_name    
 
-
+    def _get_full_name(self):
+        "Returns the person's full name."
+        return '%s %s' % (self.first_name, self.last_name)
+    full_name = property(_get_full_name)
         
 class Purchase(models.Model):
     project = models.ForeignKey(Project, blank=True, null=True)
@@ -60,12 +67,12 @@ class Purchase(models.Model):
     client = models.ForeignKey(Client, blank=True, null=True)
     deposit = models.IntegerField(default=0)
     solicitor = models.CharField(max_length=40,blank=True)
-    date_of_EOI_sent = models.DateTimeField( blank=True, null = True)
-    date_of_contract_received = models.DateTimeField( blank=True, null = True)
-    date_of_contract_signed = models.DateTimeField( blank=True, null = True)
-    date_of_BOD_paid  = models.DateTimeField( blank=True, null = True)
-    date_of_contract_exchanged = models.DateTimeField( blank=True, null = True)
-    date_of_settlement = models.DateTimeField( blank=True, null = True)
+    date_of_EOI_sent = models.DateField( blank=True, null = True)
+    date_of_contract_received = models.DateField( blank=True, null = True)
+    date_of_contract_signed = models.DateField( blank=True, null = True)
+    date_of_BOD_paid  = models.DateField( blank=True, null = True)
+    date_of_contract_unconditional = models.DateField( blank=True, null = True)
+    date_of_settlement = models.DateField( blank=True, null = True)
     commission1 = models.IntegerField(default=0)
     commission2 = models.IntegerField(default=0)
     tyler_commission1 = models.IntegerField(default=0)
@@ -75,9 +82,13 @@ class Purchase(models.Model):
     letter1 = models.CharField(max_length=40,blank=True)
     letter2 = models.CharField(max_length=40,blank=True)
     letter3 = models.CharField(max_length=40,blank=True)
-    
-    
+    modified_date = models.DateTimeField(default =timezone.now(), blank=True)
+    class Meta:
+        ordering = ["-modified_date"]
+        
     def __unicode__(self):        
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 
-    
+    def save(self):        
+        self.modified_date = timezone.now()       
+        super(Purchase,self).save()
