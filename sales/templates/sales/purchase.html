@@ -16,9 +16,9 @@ caption {
 </head>
 <body>
 
-<h1 align="center">Real Estate Sales List </h1>
+<h1 align="center">Real Estate Purchase List </h1>
 
-{% if latest_sales_list %}
+{% if latest_purchase_list %}
     <ul>
         <table>
           
@@ -33,7 +33,7 @@ caption {
             <th>Contract Signed Date</th>
             <th>Contract Exchanged Date</th>
           </tr>
-          {% for sale in latest_sales_list%}
+          {% for sale in latest_purchase_list%}
               <tr>
                 <td width="5%">{{forloop.counter}}</td>
                 <td width="5%">{{sale.project}}</td>
@@ -50,7 +50,7 @@ caption {
         </table>         
     </ul>
 {% else %}
-    <p>No sales result is available.</p>
+    <p>No purchase result is available.</p>
 {% endif %}
 
 </body>

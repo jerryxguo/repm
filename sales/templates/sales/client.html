@@ -1,0 +1,50 @@
+
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+caption {
+    text-align: center;
+    margin-bottom: 5px;   
+    font-size: 160%;
+    padding: 5px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center">Real Estate Client List </h1>
+
+{% if latest_client_list %}
+    <ul>
+        <table>
+          
+          <tr>
+            <th>Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+           
+          </tr>
+          {% for client in latest_client_list%}
+              <tr>
+                <td width="5%">{{forloop.counter}}</td>
+                <td width="5%">{{client.first_name}}</td>
+                <td width="5%">{{client.last_name}}</td>
+                <td width="5%">{{client.email}}</td>
+                <td width="5%">{{client.mobile}}</td>
+               
+              </tr>
+          {% endfor %}
+        </table>         
+    </ul>
+{% else %}
+    <p>No client is available.</p>
+{% endif %}
+
+</body>
+</html>
