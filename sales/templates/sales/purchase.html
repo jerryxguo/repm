@@ -31,7 +31,7 @@ caption {
             <th>Client</th>
             <th>Solicitor</th>
             <th>Contract Signed Date</th>
-            <th>Contract Exchanged Date</th>
+            <th>Contract Unconditional Date</th>
           </tr>
           {% for sale in latest_purchase_list%}
               <tr>
@@ -44,7 +44,7 @@ caption {
                 
                 <td width="15%" >{{sale.solicitor}}</td>
                 <td width="15%" >{{sale.date_of_contract_signed}}</td>
-                <td width="15%" >{{sale.date_of_contract_received}}</td>
+                <td width="15%" >{{sale.date_of_contract_unconditional}}</td>
               </tr>
           {% endfor %}
         </table>         

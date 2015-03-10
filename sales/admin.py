@@ -48,7 +48,7 @@ class PurchaseResource(resources.ModelResource):
     class Meta:
         model = Purchase
         #fields = ('id', 'project', 'office','client', 'sales')
-        #exclude = ['tyler_commission1', 'tyler_commission2', 'commission1', 'commission2']
+        #exclude = ['tyler_commission_paid', 'tyler_commission_unpaid', 'commission_paid', 'commission_unpaid']
      
     project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))
     project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
@@ -72,12 +72,12 @@ class PurchaseAdmin(ImportExportModelAdmin):
         ('Property Info',    {'fields': (('project','project_lot'),)}),       
         ('Sales Info',       {'fields': (('office','sales'),)}), 
         ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
-        ('Commission Info',  {'fields': (('commission1','commission2'), ('tyler_commission1','tyler_commission2'),)}), 
+        ('Commission Info',  {'fields': (('commission_paid','commission_unpaid'), ('tyler_commission_paid','tyler_commission_unpaid'),)}), 
         ('Others',      {'fields': (('email','note'),('letter1','letter2','letter3'),)}), 
         
     ]
     
-    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission1','commission2', 'tyler_commission1','tyler_commission2','email','note','letter1','letter2','letter3')
+    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_paid','commission_unpaid', 'tyler_commission_paid','tyler_commission_unpaid', 'bonus','email','note','letter1','letter2','letter3')
     list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_unconditional','date_of_settlement']
     search_fields = ['project','sales', 'client', 'office']
     

@@ -38,6 +38,7 @@ class Sales(models.Model):
     email = models.EmailField()
     mobile = models.CharField(max_length=20)
     office = models.ForeignKey(Office, blank=True, null=True)
+    leader = models.BooleanField(default=False)
     def __unicode__(self):
         return self.last_name + ','+ self.first_name
     def _get_full_name(self):
@@ -73,10 +74,11 @@ class Purchase(models.Model):
     date_of_BOD_paid  = models.DateField( blank=True, null = True)
     date_of_contract_unconditional = models.DateField( blank=True, null = True)
     date_of_settlement = models.DateField( blank=True, null = True)
-    commission1 = models.IntegerField(default=0)
-    commission2 = models.IntegerField(default=0)
-    tyler_commission1 = models.IntegerField(default=0)
-    tyler_commission2 = models.IntegerField(default=0)
+    commission_paid = models.IntegerField(default=0)
+    commission_unpaid = models.IntegerField(default=0)
+    tyler_commission_paid = models.IntegerField(default=0)
+    tyler_commission_unpaid = models.IntegerField(default=0)
+    bonus = models.IntegerField(default=0)
     email = models.EmailField(blank=True)
     note = models.CharField(max_length=100,blank=True)
     letter1 = models.CharField(max_length=40,blank=True)
@@ -85,7 +87,12 @@ class Purchase(models.Model):
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
     class Meta:
         ordering = ["-modified_date"]
-        
+    
+
+    def _get_bonus(self):        
+        return (self.commission_paid + self.commission_unpaid)/100.0
+    bonus = property(_get_bonus)
+    
     def __unicode__(self):        
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 
