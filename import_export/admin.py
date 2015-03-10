@@ -316,7 +316,7 @@ class ExportMixin(ImportExportMixinBase):
             export_fields = []
             for i in form.cleaned_data['export_fields']:
                 export_fields.append(fields[int(i)])
-            logger.info(".form.cleaned_data['export_fields'] = %s", export_fields)
+            
             
             queryset = self.get_export_queryset(request)
             export_data = self.get_export_data(file_format, export_fields, queryset)
