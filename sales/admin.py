@@ -48,7 +48,7 @@ class PurchaseResource(resources.ModelResource):
     class Meta:
         model = Purchase
         #fields = ('id', 'project', 'office','client', 'sales')
-        exclude = ['tyler_commission1', 'tyler_commission2', 'commission1', 'commission2']
+        #exclude = ['tyler_commission1', 'tyler_commission2', 'commission1', 'commission2']
      
     project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))
     project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
