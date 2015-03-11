@@ -24,8 +24,7 @@ caption {
           
           <tr>
             <th>Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Mobile</th>
             <th>Office</th>
@@ -33,8 +32,7 @@ caption {
           {% for sales in latest_sales_list%}
               <tr>
                 <td width="5%">{{forloop.counter}}</td>
-                <td width="5%">{{sales.first_name}}</td>
-                <td width="5%">{{sales.last_name}}</td>
+                <td width="5%">{{sales.full_name}}</td>                
                 <td width="5%">{{sales.email}}</td>
                 <td width="5%">{{sales.mobile}}</td>
                 <td width="5%">{{sales.office}}</td>

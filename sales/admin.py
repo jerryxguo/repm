@@ -48,13 +48,13 @@ class PurchaseResource(resources.ModelResource):
     class Meta:
         model = Purchase
         #fields = ('id', 'project', 'office','client', 'sales')
-        #exclude = ['tyler_commission_paid', 'tyler_commission_unpaid', 'commission_paid', 'commission_unpaid']
+        #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      
     project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))
     project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
     office = fields.Field(column_name='office', attribute='office', widget=widgets.ForeignKeyWidget(Office,'city'))
-    sales = fields.Field(column_name='sales', attribute='sales', widget=OneToManyForeignKeyWidget(Sales,['last_name','first_name']))
-    client = fields.Field(column_name='client', attribute='client', widget=OneToManyForeignKeyWidget(Client,['last_name','first_name']))
+    sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
+    client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
    
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
@@ -71,14 +71,17 @@ class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
         ('Property Info',    {'fields': (('project','project_lot'),)}),       
         ('Sales Info',       {'fields': (('office','sales'),)}), 
-        ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
-        ('Commission Info',  {'fields': (('commission_paid','commission_unpaid'), ('tyler_commission_paid','tyler_commission_unpaid'),)}), 
+        ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
+        ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
         ('Others',      {'fields': (('email','note'),('letter1','letter2','letter3'),)}), 
         
     ]
     
-    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_paid','commission_unpaid', 'tyler_commission_paid','tyler_commission_unpaid', 'bonus','email','note','letter1','letter2','letter3')
-    list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_unconditional','date_of_settlement']
+    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed', \
+    'date_of_contract_exchanged','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1',\
+    'commission_1_date','commission_2','commission_2_date', 'commission_total', 'tyler_commission_1', \
+    'tyler_commission_1_date','tyler_commission_2', 'tyler_commission_2_date', 'tyler_commission_total','bonus','email','note','letter1','letter2','letter3')
+    list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional','date_of_settlement']
     search_fields = ['project','sales', 'client', 'office']
     
     resource_class = PurchaseResource
@@ -125,9 +128,9 @@ admin.site.register(Project,ProjectAdmin)
 class ClientAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Client Info',    {'fields': (('first_name','last_name','email','mobile'),)}),
+        ('Client Info',    {'fields': (('full_name','email','mobile'),)}),
        
     ]
-    list_display = ('first_name','last_name','email','mobile')
+    list_display = ('full_name','email','mobile')
     
 admin.site.register(Client,ClientAdmin)
