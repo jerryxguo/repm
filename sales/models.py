@@ -31,9 +31,9 @@ class Purchase(models.Model):
     date_of_BOD_paid  = models.DateField( blank=True, null = True)
     date_of_contract_unconditional = models.DateField( blank=True, null = True)
     date_of_settlement = models.DateField( blank=True, null = True)
-    commission_1 = models.IntegerField(default=0, null = True)
+    commission_1 = models.IntegerField(default=0, null = True,blank=True)
     commission_1_date = models.DateField( blank=True, null = True)
-    commission_2 = models.IntegerField(default=0,null = True)
+    commission_2 = models.IntegerField(default=0,null = True,blank=True)
     commission_2_date = models.DateField( blank=True, null = True)
     def _get_commission_total(self):
         if self.commission_1 is None:
@@ -44,8 +44,8 @@ class Purchase(models.Model):
     commission_total = property(_get_commission_total)
     tyler_commission_1 = models.IntegerField(default=0,null = True,blank=True)
     tyler_commission_2 = models.IntegerField(default=0,null = True,blank=True)
-    tyler_commission_1_date = models.DateField( blank=True, null = True,blank=True)
-    tyler_commission_2_date = models.DateField( blank=True, null = True,blank=True)
+    tyler_commission_1_date = models.DateField( blank=True, null = True)
+    tyler_commission_2_date = models.DateField( blank=True, null = True)
     def _get_tyler_commission_total(self):
         if self.tyler_commission_1 is None:
             self.tyler_commission_1 = 0
@@ -62,7 +62,8 @@ class Purchase(models.Model):
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
     class Meta:
         ordering = ["-modified_date"]
-    
+        verbose_name_plural  = 'Sale Records'
+        verbose_name  = 'Sale'
     def __unicode__(self):        
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 

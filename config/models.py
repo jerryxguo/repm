@@ -56,6 +56,8 @@ class Client(models.Model):
     
     email = models.EmailField(blank=True)
     mobile = models.CharField(max_length=20,blank=True)
+    class Meta:
+        verbose_name_plural  = 'Clients'
     
     def __unicode__(self):
         return self.full_name 
