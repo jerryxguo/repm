@@ -7,8 +7,8 @@ from django.views import generic
 from django.utils import timezone
 
 from sales.models import Purchase
-from sales.models import Client
-from sales.models import Sales
+from config.models import Client
+from config.models import Sales
 # Create your views here.
 # Create your views here.
 class PurchaseView(generic.ListView):

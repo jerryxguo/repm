@@ -7,11 +7,12 @@ from import_export import widgets
 from import_export import fields
 
 from sales.models import Purchase
-from sales.models import Project
-from sales.models import Property
-from sales.models import Client
-from sales.models import Sales
-from sales.models import Office
+
+from config.models import Project
+from config.models import Property
+from config.models import Client
+from config.models import Sales
+from config.models import Office
 
 import logging
 logger = logging.getLogger(__name__)
@@ -88,49 +89,3 @@ class PurchaseAdmin(ImportExportModelAdmin):
     
 admin.site.register(Purchase,PurchaseAdmin)
 
-#########################################
-#sales#
-
-class SalesInline(admin.TabularInline):
-    model = Sales
-    extra = 10
-        
-
-class OfficeAdmin(admin.ModelAdmin):
-    
-    fieldsets = [
-        ('Office',               {'fields': ['city']}),
-    ]
-    inlines = [SalesInline]
-    
-admin.site.register(Office,OfficeAdmin)
-
-#########################################
-#property#
-
-class PropertyInline(admin.TabularInline):
-    model = Property
-    extra = 10
-        
-
-class ProjectAdmin(admin.ModelAdmin):
-    
-    fieldsets = [
-        ('Project',               {'fields': ['name']}),
-    ]
-    inlines = [PropertyInline]
-    
-admin.site.register(Project,ProjectAdmin)
-
-#########################################
-#client#       
-
-class ClientAdmin(admin.ModelAdmin):
-    
-    fieldsets = [
-        ('Client Info',    {'fields': (('full_name','email','mobile'),)}),
-       
-    ]
-    list_display = ('full_name','email','mobile')
-    
-admin.site.register(Client,ClientAdmin)

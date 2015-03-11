@@ -70,9 +70,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'config',
     'sales',
     'import_export',
     'smart_selects',
+    
 )
 
 MIDDLEWARE_CLASSES = (
