@@ -8,19 +8,16 @@ from config.models import Property
 from config.models import Client
 from config.models import Sales
 from config.models import Office
+from config.models import Bonus
 
 import logging
 logger = logging.getLogger(__name__)
 # Create your models here.
-
-
-
-        
 class Purchase(models.Model):
-    project = models.ForeignKey(Project, blank=True, null=True)
-    project_lot = ChainedForeignKey(Property,chained_field="project",chained_model_field="project",  show_all=False, auto_choose=True, blank=True, null=True)
-    office = models.ForeignKey(Office, blank=True, null=True)
-    sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True, blank=True, null=True)
+    project = models.ForeignKey(Project, null=True)
+    project_lot = ChainedForeignKey(Property,chained_field="project",chained_model_field="project",  show_all=False, auto_choose=True,  null=True)
+    office = models.ForeignKey(Office, null=True)
+    sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True, null=True)
     client = models.ForeignKey(Client, blank=True, null=True)
     deposit = models.IntegerField(default=0, null=True)
     solicitor = models.CharField(max_length=40,blank=True)
@@ -68,5 +65,7 @@ class Purchase(models.Model):
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 
     def save(self):        
-        self.modified_date = timezone.now()       
+        self.modified_date = timezone.now()
+        
         super(Purchase,self).save()
+        

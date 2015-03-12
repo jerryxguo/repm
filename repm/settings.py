@@ -35,7 +35,12 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
-        'django': {
+        'sales': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'config': {
             'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
