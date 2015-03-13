@@ -31,7 +31,7 @@ admin.site.register(Office,OfficeAdmin)
 ###############################
 class SalesAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Sales Info',    {'fields': (('full_name','email','mobile',),)}),       
+        ('Sales Info',    {'fields': (('office','full_name','email','mobile',),)}),       
     ]
     
    

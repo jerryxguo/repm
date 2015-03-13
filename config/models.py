@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class Office(models.Model):
-    city = models.CharField(max_length=20, primary_key = True)
+    city = models.CharField(max_length=20, unique=True, primary_key = True)
     exclude = models.BooleanField(default=False)
     address = models.CharField(max_length=40, blank=True, null=True)   
     state = models.CharField(max_length=10, blank=True, null=True)
@@ -28,7 +28,7 @@ class Sales(models.Model):
     
     email = models.EmailField()
     mobile = models.CharField(max_length=10)
-    office = models.ForeignKey(Office, blank=True, null=True)
+    office = models.ForeignKey(Office)
     number_of_sales = models.IntegerField(default=0, blank=True, null=True)
     def _get_total_sales(self):        
         return self.number_of_sales 
@@ -90,7 +90,7 @@ class Project(models.Model):
         verbose_name_plural  = 'project'
         
 class Property(models.Model):
-    project = models.ForeignKey(Project, blank=True, null=True)
+    project = models.ForeignKey(Project)
     lot = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
     lot_sales = models.ForeignKey(Sales, blank=True, null=True)
@@ -128,10 +128,10 @@ class Property(models.Model):
         logger.debug('self.status %s, self.__original_status = %s,', self.status, self.__original_status)   
         if self.status != self.__original_status:
             #logger.debug(' name changed - do something here')
-            self.modification_date = timezone.now()
-            super(Property, self).save()
+            self.modification_date = timezone.now()            
             self.__original_status = self.status
-            
+        super(Property, self).save()
+        
 class Bonus(models.Model):
     
     number_of_sales = models.IntegerField('Number of Sales', default=0)    
