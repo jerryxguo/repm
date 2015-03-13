@@ -1,6 +1,28 @@
-[12/Mar/2015 20:30:21] DEBUG [config.signals:35] DO add_sales bj2
-[12/Mar/2015 20:30:21] DEBUG [config.signals:14] DO send_email bj2
-[12/Mar/2015 20:30:21] DEBUG [config.signals:14] DO send_email bj2
-[13/Mar/2015 11:34:09] DEBUG [config.signals:35] DO add_sales bj2
-[13/Mar/2015 11:34:09] DEBUG [config.signals:14] DO send_email bj2
-[13/Mar/2015 11:34:09] DEBUG [config.signals:14] DO send_email bj2
+[13/Mar/2015 20:31:11] DEBUG [config.signals:45] update_propertys = 1
+[13/Mar/2015 20:39:43] DEBUG [config.signals:51] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:39:43] DEBUG [config.signals:45] update_propertys = 1 type = <class 'config.models.Property'>, 
+[13/Mar/2015 20:40:58] DEBUG [config.signals:52] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:40:58] DEBUG [config.signals:46] update_propertys = 1 type = <class 'config.models.Property'>, 
+[13/Mar/2015 20:45:33] DEBUG [config.signals:52] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:45:33] DEBUG [config.signals:46] update_project spring propertys = 1 type = <class 'config.models.Project'>, 
+[13/Mar/2015 20:47:08] DEBUG [config.signals:52] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:48:06] DEBUG [config.signals:52] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:48:06] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
+[13/Mar/2015 20:49:16] DEBUG [config.signals:52] DO add_sales sale 1, raw = False, update_fields = None
+[13/Mar/2015 20:49:16] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
+[13/Mar/2015 20:54:43] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 20:54:54] DEBUG [config.signals:53] DO add_sales s1, raw = False, update_fields = None
+[13/Mar/2015 20:54:54] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
+[13/Mar/2015 20:54:54] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 20:56:59] DEBUG [config.signals:53] DO add_sales s1, raw = False, update_fields = None
+[13/Mar/2015 20:56:59] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
+[13/Mar/2015 20:56:59] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 20:57:14] DEBUG [config.signals:53] DO add_sales s1, raw = False, update_fields = None
+[13/Mar/2015 20:57:14] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
+[13/Mar/2015 20:57:14] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 20:57:43] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 21:07:05] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 21:08:15] DEBUG [config.models:128] self.status CR, self.__original_status = CS,
+[13/Mar/2015 21:08:15] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None
+[13/Mar/2015 21:09:14] DEBUG [config.models:128] self.status CS, self.__original_status = CR,
+[13/Mar/2015 21:09:14] DEBUG [config.signals:78] DO save_property 10, raw = False, update_fields = None

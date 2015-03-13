@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from smart_selects.db_fields import ChainedForeignKey
 from config.models import Project
-
+from config.models import Property
 from config.models import Client
 from config.models import Sales
 from config.models import Office
@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 # Create your models here.
 class Purchase(models.Model):
     project = models.ForeignKey(Project, null=True)
-    project_lot = models.CharField(max_length=40,blank=True, null=True)
-    price = models.IntegerField(default=0,null = True,blank=True)
+    project_lot = ChainedForeignKey(Property,chained_field="project",chained_model_field="project",  show_all=False, auto_choose=True,  null=True)
+   
     office = models.ForeignKey(Office, null=True)
     sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True, null=True)
     client = models.ForeignKey(Client, blank=True, null=True)
@@ -58,6 +58,11 @@ class Purchase(models.Model):
     letter2 = models.CharField(max_length=40,blank=True)
     letter3 = models.CharField(max_length=40,blank=True)
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
+    
+    lot_price = models.IntegerField(default=0, null=True)
+    def _get_lot_price(self):       
+        return self.lot_price 
+    price = property(_get_lot_price)
     class Meta:
         ordering = ["-modified_date"]
         verbose_name_plural  = 'Sale Records'

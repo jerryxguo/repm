@@ -30,7 +30,13 @@ class Sales(models.Model):
     mobile = models.CharField(max_length=10)
     office = models.ForeignKey(Office, blank=True, null=True)
     number_of_sales = models.IntegerField(default=0, blank=True, null=True)
-    accumulation_bonus = models.IntegerField(default=0, blank=True,  null=True)    
+    def _get_total_sales(self):        
+        return self.number_of_sales 
+    total_sales = property(_get_total_sales)
+    accumulation_bonus = models.IntegerField(default=0, blank=True,  null=True)  
+    def _get_accumulated_bonus(self):        
+        return self.accumulation_bonus 
+    accumulated_bonus = property(_get_accumulated_bonus)
     bonus_paid = models.IntegerField(default=0, blank=True, null=True)
     date_of_paid = models.DateField( blank=True, null = True)
 
@@ -56,14 +62,13 @@ class Sales(models.Model):
             
 class Client(models.Model):
     full_name = models.CharField(max_length=30)
-    
+    number = models.IntegerField(default=0)
     
     email = models.EmailField(blank=True)
     mobile = models.CharField(max_length=10,blank=True)
    
-    def _get_number_of_properties(self):
-        
-        return 0
+    def _get_number_of_properties(self):        
+        return self.number
         
     number_of_properties = property(_get_number_of_properties)
 
@@ -88,8 +93,14 @@ class Property(models.Model):
     project = models.ForeignKey(Project, blank=True, null=True)
     lot = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
-    sales = models.ForeignKey(Sales, blank=True, null=True)
-    client = models.ForeignKey(Client, blank=True, null=True)
+    lot_sales = models.ForeignKey(Sales, blank=True, null=True)
+    lot_client = models.ForeignKey(Client, blank=True, null=True)
+    def _get_sales(self):
+        return self.lot_sales        
+    sales = property(_get_sales)
+    def _get_client(self):
+        return self.lot_client        
+    client = property(_get_client)
     
     STATUS_CHOICES = (
         ('--', '------'),
@@ -100,19 +111,27 @@ class Property(models.Model):
         ('PS', 'Property Settled'),
     )
     status = models.CharField(max_length=2, choices=STATUS_CHOICES, default ='--')    
-    date = models.DateField( blank=True, null = True)    
-    def _get_date(self):
-        if self.status=='--':
-            return None
-        return timezone.now()
+    modification_date = models.DateField( blank=True, null = True)    
+    def _get_date(self):        
+        return self.modification_date
         
-    date = property(_get_date)
+    status_date = property(_get_date)
     def __unicode__(self):
         return str(self.lot)
     class Meta:
         verbose_name_plural  = 'Properties'
         
-        
+    def __init__(self, *args, **kwargs):
+        super(Property, self).__init__(*args, **kwargs)
+        self.__original_status = self.status
+    def save(self):
+        logger.debug('self.status %s, self.__original_status = %s,', self.status, self.__original_status)   
+        if self.status != self.__original_status:
+            #logger.debug(' name changed - do something here')
+            self.modification_date = timezone.now()
+            super(Property, self).save()
+            self.__original_status = self.status
+            
 class Bonus(models.Model):
     
     number_of_sales = models.IntegerField('Number of Sales', default=0)    

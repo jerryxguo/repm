@@ -12,8 +12,10 @@ from config.models import Bonus
 #sales#
 
 class SalesInline(admin.TabularInline):
-    
-    readonly_fields = ('bonus_unpaid',)
+    fieldsets = [
+        ('Sales Info',    {'fields': (('full_name','email','mobile','total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid','leader','is_director','on_board','referrer'),)}),       
+    ]
+    readonly_fields = ('total_sales','accumulated_bonus','bonus_unpaid',)
     model = Sales
     extra = 3
         
@@ -21,30 +23,60 @@ class SalesInline(admin.TabularInline):
 class OfficeAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Office',               {'fields': (('city'),('address','state','country'),('phone'),)}),
+        ('Office', {'fields': (('city'),('address','state','country'),('phone'),)}),
     ]
     inlines = [SalesInline]
     
 admin.site.register(Office,OfficeAdmin)
-
+###############################
+class SalesAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Sales Info',    {'fields': (('full_name','email','mobile',),)}),       
+    ]
+    
+   
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+    
+admin.site.register(Sales,SalesAdmin)
+#########################################
 #########################################
 #property#
 
 class PropertyInline(admin.TabularInline):
+    fieldsets = [
+        ('Property Info',    {'fields': (('project','lot','price','sales','client','status','status_date'),)}),       
+    ]
     model = Property
     extra = 3
-    readonly_fields = ('date',)    
+    readonly_fields = ('status_date','sales','client')    
 
 class ProjectAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Project',               {'fields': (('name','address','city','state'),)}),
+        ('Project', {'fields': (('name','address','city','state'),)}),
     ]
     list_display = ('name','address','city','state')
     inlines = [PropertyInline]
     
 admin.site.register(Project,ProjectAdmin)
-
+###############################
+class PropertyAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Property Info',    {'fields': (('project','lot','price',),)}),       
+    ]
+    
+    
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+    
+admin.site.register(Property,PropertyAdmin)
 #########################################
 #client#       
 
