@@ -51,16 +51,13 @@ class PurchaseResource(resources.ModelResource):
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      
-    project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))
-    project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
+    project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))    
     office = fields.Field(column_name='office', attribute='office', widget=widgets.ForeignKeyWidget(Office,'city'))
     sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
     client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
    
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
-    def dehydrate_project_lot(self, Purchase):
-        return unicode(Purchase.project_lot) if Purchase.project_lot else None
     def dehydrate_office(self, Purchase):
         return unicode(Purchase.office) if Purchase.office else None    
     def dehydrate_client(self, Purchase):
@@ -70,7 +67,7 @@ class PurchaseResource(resources.ModelResource):
 
 class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
-        ('Property Info',    {'fields': (('project','project_lot'),)}),       
+        ('Property Info',    {'fields': (('project','project_lot', 'price'),)}),       
         ('Sales Info',       {'fields': (('office','sales'),)}), 
         ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
         ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
@@ -78,7 +75,7 @@ class PurchaseAdmin(ImportExportModelAdmin):
         
     ]
     
-    list_display = ('project', 'project_lot', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed', \
+    list_display = ('project', 'project_lot', 'price', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed', \
     'date_of_contract_exchanged','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1',\
     'commission_1_date','commission_2','commission_2_date', 'commission_total', 'tyler_commission_1', \
     'tyler_commission_1_date','tyler_commission_2', 'tyler_commission_2_date', 'tyler_commission_total','bonus','email','note','letter1','letter2','letter3')

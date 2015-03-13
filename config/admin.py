@@ -21,7 +21,7 @@ class SalesInline(admin.TabularInline):
 class OfficeAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Office',               {'fields': ['city']}),
+        ('Office',               {'fields': (('city'),('address','state','country'),('phone'),)}),
     ]
     inlines = [SalesInline]
     
@@ -33,13 +33,14 @@ admin.site.register(Office,OfficeAdmin)
 class PropertyInline(admin.TabularInline):
     model = Property
     extra = 3
-        
+    readonly_fields = ('date',)    
 
 class ProjectAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Project',               {'fields': ['name']}),
+        ('Project',               {'fields': (('name','address','city','state'),)}),
     ]
+    list_display = ('name','address','city','state')
     inlines = [PropertyInline]
     
 admin.site.register(Project,ProjectAdmin)
@@ -51,9 +52,10 @@ class ClientAdmin(admin.ModelAdmin):
     
     fieldsets = [
         ('Client Info',    {'fields': (('full_name','email','mobile'),)}),
-       
+        ('Property Info',   {'fields': (('number_of_properties',),)}),
     ]
-    list_display = ('full_name','email','mobile')
+    readonly_fields = ('number_of_properties',)
+    list_display = ('full_name','email','mobile','number_of_properties')
     
 admin.site.register(Client,ClientAdmin)
 
