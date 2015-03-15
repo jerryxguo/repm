@@ -19,7 +19,7 @@ class Purchase(models.Model):
    
     office = models.ForeignKey(Office)
     sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True)
-    client = models.ForeignKey(Client)
+    client = models.ForeignKey(Client, to_field ='full_name')
     deposit = models.IntegerField(default=0, null=True)
     solicitor = models.CharField(max_length=40,blank=True)
     date_of_EOI_sent = models.DateField( 'Date EOI Sent', blank=True, null = True)
@@ -52,7 +52,9 @@ class Purchase(models.Model):
         return (self.tyler_commission_1 + self.tyler_commission_2)
     tyler_commission_total = property(_get_tyler_commission_total)
     bonus = models.IntegerField(default=0,null = True,blank=True)
-    email = models.EmailField(blank=True)
+    def _get_client_email(self):
+        return self.client.email 
+    client_email = property(_get_client_email)
     note = models.CharField(max_length=100,blank=True)
     letter1 = models.CharField(max_length=40,blank=True)
     letter2 = models.CharField(max_length=40,blank=True)
@@ -71,7 +73,6 @@ class Purchase(models.Model):
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 
     def save(self):        
-        self.modified_date = timezone.now()
-        
+        self.modified_date = timezone.now()        
         super(Purchase,self).save()
         

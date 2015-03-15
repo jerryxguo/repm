@@ -13,7 +13,7 @@ from config.models import Bonus
 
 class SalesInline(admin.TabularInline):
     fieldsets = [
-        ('Sales Info',    {'fields': (('full_name','email','mobile','total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid','leader','is_director','on_board','referrer'),)}),       
+        ('Sales Info',    {'fields': (('full_name','email','mobile','total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid','leader','director','on_board','referrer'),)}),       
     ]
     readonly_fields = ('total_sales','accumulated_bonus','bonus_unpaid',)
     model = Sales
@@ -23,15 +23,16 @@ class SalesInline(admin.TabularInline):
 class OfficeAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Office', {'fields': (('city'),('address','state','country'),('phone'),)}),
+        ('Office', {'fields': (('city','independent',),('address','country'),('phone'),)}),
     ]
+    list_display = ('city', 'independent', 'phone')
     inlines = [SalesInline]
     
 admin.site.register(Office,OfficeAdmin)
 ###############################
 class SalesAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Sales Info',    {'fields': (('office','full_name','email','mobile',),)}),       
+        ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),)}),       
     ]
     
    

@@ -12,9 +12,9 @@ logger = logging.getLogger(__name__)
 
 class Office(models.Model):
     city = models.CharField(max_length=20, unique=True, primary_key = True)
-    exclude = models.BooleanField(default=False)
+    independent = models.BooleanField(default=False)
     address = models.CharField(max_length=40, blank=True, null=True)   
-    state = models.CharField(max_length=10, blank=True, null=True)
+    
     country = models.CharField(max_length=10, blank=True, null=True)
     phone = models.CharField('Contact Phone Number', max_length=10, blank=True, null=True)
     def __unicode__(self):
@@ -49,7 +49,7 @@ class Sales(models.Model):
     bonus_unpaid = property(_get_bonus_unpaid)
     
     leader = models.BooleanField(default=False)
-    is_director =  models.BooleanField(default=False)
+    director =  models.BooleanField(default=False)
     on_board = models.BooleanField(default=True)   
     
     referrer = models.CharField('Referer', max_length=30, blank=True, null=True)
@@ -61,10 +61,10 @@ class Sales(models.Model):
             
             
 class Client(models.Model):
-    full_name = models.CharField(max_length=30)
+    full_name = models.CharField(max_length=30, unique = True)
     number = models.IntegerField(default=0)
     
-    email = models.EmailField(blank=True)
+    email = models.EmailField(blank=True, unique = True)
     mobile = models.CharField(max_length=10,blank=True)
    
     def _get_number_of_properties(self):        

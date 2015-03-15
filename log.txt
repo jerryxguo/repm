@@ -1,17 +1,20 @@
-[13/Mar/2015 21:19:10] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[13/Mar/2015 21:20:24] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:08:00] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:09:40] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:09:56] DEBUG [config.signals:53] DO add_sales sale5, raw = False, update_fields = None
-[14/Mar/2015 09:09:56] DEBUG [config.signals:46] update_project spring propertys = 13 type = <type 'int'>, 
-[14/Mar/2015 09:09:56] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:14:25] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:14:39] DEBUG [config.signals:53] DO add_sales s8, raw = False, update_fields = None
-[14/Mar/2015 09:16:04] DEBUG [config.signals:53] DO add_sales s4, raw = False, update_fields = None
-[14/Mar/2015 09:16:04] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
-[14/Mar/2015 09:16:04] DEBUG [config.models:128] self.status CS, self.__original_status = CS,
-[14/Mar/2015 09:16:23] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:16:28] DEBUG [config.signals:53] DO add_sales s1, raw = False, update_fields = None
-[14/Mar/2015 09:16:28] DEBUG [config.signals:46] update_project spring propertys = 15 type = <type 'int'>, 
-[14/Mar/2015 09:16:28] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[14/Mar/2015 09:16:58] DEBUG [config.models:128] self.status CR, self.__original_status = --,
+[15/Mar/2015 14:27:32] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
+[15/Mar/2015 14:27:49] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
+[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
+[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
+[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
+[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
+[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
+[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
+[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:29:33] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:30:14] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:30:27] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:32:33] DEBUG [config.signals:53] DO add_sales michael, raw = False, update_fields = None
+[15/Mar/2015 14:32:33] DEBUG [config.signals:46] update_project home propertys = 1 type = <type 'int'>, 
+[15/Mar/2015 14:32:33] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:34:43] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 14:34:50] DEBUG [config.signals:53] DO add_sales michael, raw = False, update_fields = None
+[15/Mar/2015 14:34:50] DEBUG [config.signals:46] update_project home propertys = 10 type = <type 'int'>, 

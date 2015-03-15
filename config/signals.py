@@ -51,22 +51,16 @@ def update_property(instance):
     
 def save_sales(sender, instance, created, raw, using, update_fields, **kwargs):
     logger.debug('DO add_sales %s, raw = %s, update_fields = %s', instance.sales, raw, update_fields)     
-    
-    if created:
+    if instance.office.independent is False:
         update_sales(instance)
-        update_client(instance)
-        update_property(instance)
-    else:       
-        if 'sales' in update_fields:
-            update_sales(instance)
-        if 'client' in update_fields:
-            update_client(instance)    
-        if 'project_lot' in update_fields or 'project' in update_fields:
-            update_property(instance)
-        
+    update_client(instance)
+    update_property(instance)
+   
+    
 def delete_sales(sender, instance, using, **kwargs):
     logger.debug('DO delete_sales %s, client = %s, lot = %s', instance.sales, instance.client, instance.project_lot)
-    update_sales(instance)
+    if instance.office.independent is False:
+        update_sales(instance)
     update_client(instance)
     update_property(instance)        
            
