@@ -57,7 +57,7 @@ class Sales(models.Model):
         return self.full_name
     class Meta:        
         verbose_name_plural  = 'Sales'
- 
+        unique_together = (("office", "full_name"),)
             
             
 class Client(models.Model):
@@ -120,7 +120,7 @@ class Property(models.Model):
         return str(self.lot)
     class Meta:
         verbose_name_plural  = 'Properties'
-        
+        unique_together = (("project", "lot"),)
     def __init__(self, *args, **kwargs):
         super(Property, self).__init__(*args, **kwargs)
         self.__original_status = self.status

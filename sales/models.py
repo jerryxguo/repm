@@ -69,6 +69,7 @@ class Purchase(models.Model):
         ordering = ["-modified_date"]
         verbose_name_plural  = 'Sale Records'
         verbose_name  = 'Sale'
+        unique_together = (("project", "project_lot"),)
     def __unicode__(self):        
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 

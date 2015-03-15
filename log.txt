@@ -18,3 +18,14 @@
 [15/Mar/2015 14:34:43] DEBUG [config.models:128] self.status --, self.__original_status = --,
 [15/Mar/2015 14:34:50] DEBUG [config.signals:53] DO add_sales michael, raw = False, update_fields = None
 [15/Mar/2015 14:34:50] DEBUG [config.signals:46] update_project home propertys = 10 type = <type 'int'>, 
+[15/Mar/2015 20:17:44] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 20:17:49] DEBUG [config.signals:53] DO add_sales sina, raw = False, update_fields = None
+[15/Mar/2015 20:17:49] DEBUG [config.signals:46] update_project home propertys = 2 type = <type 'int'>, 
+[15/Mar/2015 20:18:04] DEBUG [config.signals:53] DO add_sales haha, raw = False, update_fields = None
+[15/Mar/2015 20:18:04] DEBUG [config.signals:46] update_project spring propertys = 2 type = <type 'int'>, 
+[15/Mar/2015 20:18:17] DEBUG [config.signals:53] DO add_sales hongwei, raw = False, update_fields = None
+[15/Mar/2015 20:18:17] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
+[15/Mar/2015 20:18:17] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 20:25:21] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 20:25:21] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[15/Mar/2015 20:25:30] DEBUG [config.models:128] self.status --, self.__original_status = --,
