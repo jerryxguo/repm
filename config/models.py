@@ -29,6 +29,7 @@ class Sales(models.Model):
     email = models.EmailField()
     mobile = models.CharField(max_length=10)
     office = models.ForeignKey(Office)
+    start_date = models.DateField( blank=True, null = True)
     number_of_sales = models.IntegerField(default=0, blank=True, null=True)
     def _get_total_sales(self):        
         return self.number_of_sales 
