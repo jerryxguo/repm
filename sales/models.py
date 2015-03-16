@@ -1,4 +1,5 @@
 import datetime
+from django import forms
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
@@ -74,6 +75,18 @@ class Purchase(models.Model):
         return unicode(self.project) + ' '+ unicode(self.project_lot)
 
     def save(self):        
-        self.modified_date = timezone.now()        
+        self.modified_date = timezone.now()
         super(Purchase,self).save()
+    
+    def clean(self):       
+        logger.debug('clean.office %s, self.sales = %s,', self.office.city, self.sales.full_name) 
+        sales = Sales.objects.filter(office=self.office.city, full_name= self.sales.full_name)
+       
+        if not sales:
+            raise forms.ValidationError('Office:\''+ self.office.city + '\' doesn\'t have the sales named by: '+ self.sales.full_name + '. Change office or sales selection please!')
         
+        property = Property.objects.filter(project=self.project.name, lot= self.project_lot.lot)
+        if not property:
+            raise forms.ValidationError('Project:\''+self.project.name + '\' doesn\'t have the lot: '+ str(self.project_lot.lot) + '. Change project or lot selection please!')
+        
+        super(Purchase,self).clean() 

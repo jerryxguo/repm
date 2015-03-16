@@ -1,31 +1,29 @@
-[15/Mar/2015 14:27:32] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
-[15/Mar/2015 14:27:49] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
-[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
-[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
-[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
-[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
-[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:28:54] DEBUG [config.signals:61] DO delete_sales s1, client = client1, lot = 1
-[15/Mar/2015 14:28:54] DEBUG [config.signals:46] update_project spring propertys = 1 type = <type 'int'>, 
-[15/Mar/2015 14:28:54] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:29:33] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:30:14] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:30:27] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:32:33] DEBUG [config.signals:53] DO add_sales michael, raw = False, update_fields = None
-[15/Mar/2015 14:32:33] DEBUG [config.signals:46] update_project home propertys = 1 type = <type 'int'>, 
-[15/Mar/2015 14:32:33] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:34:43] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 14:34:50] DEBUG [config.signals:53] DO add_sales michael, raw = False, update_fields = None
-[15/Mar/2015 14:34:50] DEBUG [config.signals:46] update_project home propertys = 10 type = <type 'int'>, 
-[15/Mar/2015 20:17:44] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 20:17:49] DEBUG [config.signals:53] DO add_sales sina, raw = False, update_fields = None
-[15/Mar/2015 20:17:49] DEBUG [config.signals:46] update_project home propertys = 2 type = <type 'int'>, 
-[15/Mar/2015 20:18:04] DEBUG [config.signals:53] DO add_sales haha, raw = False, update_fields = None
-[15/Mar/2015 20:18:04] DEBUG [config.signals:46] update_project spring propertys = 2 type = <type 'int'>, 
-[15/Mar/2015 20:18:17] DEBUG [config.signals:53] DO add_sales hongwei, raw = False, update_fields = None
-[15/Mar/2015 20:18:17] DEBUG [config.signals:46] update_project spring propertys = 10 type = <type 'int'>, 
-[15/Mar/2015 20:18:17] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 20:25:21] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 20:25:21] DEBUG [config.models:128] self.status --, self.__original_status = --,
-[15/Mar/2015 20:25:30] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 16:14:43] DEBUG [sales.admin:77] clean.status beijing, self.__original_status = bejing,
+[16/Mar/2015 16:14:43] DEBUG [sales.admin:81] self.status beijing, self.__original_status = bejing,
+[16/Mar/2015 16:14:43] DEBUG [config.signals:53] DO add_sales bejing, raw = False, update_fields = None
+[16/Mar/2015 16:14:43] DEBUG [config.signals:46] update_project home propertys = 1 type = <type 'int'>, 
+[16/Mar/2015 16:14:43] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:39:46] DEBUG [sales.models:81] clean.office hq, self.sales = dfdfdfd,
+[16/Mar/2015 18:40:50] DEBUG [sales.models:81] clean.office hq, self.sales = dddddddddddddddd,
+[16/Mar/2015 18:41:56] DEBUG [sales.models:82] clean.office hq, self.sales = dfd,
+[16/Mar/2015 18:43:07] DEBUG [sales.models:82] clean.office hq, self.sales = fdfdfadf,
+[16/Mar/2015 18:47:14] DEBUG [sales.models:82] clean.office hq, self.sales = f,
+[16/Mar/2015 18:47:37] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:47:43] DEBUG [sales.models:82] clean.office hq, self.sales = hq,
+[16/Mar/2015 18:50:07] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:50:45] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:50:48] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing2,
+[16/Mar/2015 18:50:49] DEBUG [config.signals:53] DO add_sales bejing2, raw = False, update_fields = None
+[16/Mar/2015 18:50:49] DEBUG [config.signals:46] update_project spring propertys = 4 type = <type 'int'>, 
+[16/Mar/2015 18:50:49] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:51:35] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:51:39] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing21,
+[16/Mar/2015 18:58:32] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:58:42] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing2,
+[16/Mar/2015 18:59:16] DEBUG [config.models:128] self.status --, self.__original_status = --,
+[16/Mar/2015 18:59:20] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing,
+[16/Mar/2015 18:59:46] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing,
+[16/Mar/2015 18:59:58] DEBUG [sales.models:82] clean.office beijing, self.sales = bejing,
+[16/Mar/2015 18:59:58] DEBUG [config.signals:53] DO add_sales bejing, raw = False, update_fields = None
+[16/Mar/2015 18:59:58] DEBUG [config.signals:46] update_project home propertys = 1110 type = <type 'int'>, 
+[16/Mar/2015 18:59:58] DEBUG [config.models:128] self.status --, self.__original_status = --,

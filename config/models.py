@@ -16,7 +16,7 @@ class Office(models.Model):
     address = models.CharField(max_length=40, blank=True, null=True)   
     
     country = models.CharField(max_length=10, blank=True, null=True)
-    phone = models.CharField('Contact Phone Number', max_length=10, blank=True, null=True)
+    phone = models.CharField('Contact Phone', max_length=10, blank=True, null=True)
     def __unicode__(self):
         return self.city
     class Meta:
@@ -74,7 +74,7 @@ class Client(models.Model):
 
     class Meta:
         verbose_name_plural  = 'Client'
-    
+        
     def __unicode__(self):
         return self.full_name
 

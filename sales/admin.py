@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -65,6 +66,25 @@ class PurchaseResource(resources.ModelResource):
     def dehydrate_sales(self, Purchase):
         return unicode(Purchase.sales) if Purchase.sales else None
 
+'''        
+class PurchaseAdminForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = '__all__'
+        exclude = ['client_email']
+    def clean(self):       
+        sales = Sales.objects.get(office=self.cleaned_data['office'], full_name= self.cleaned_data['sales'])
+        logger.debug('clean.status %s, self.__original_status = %s,', self.cleaned_data['office'], self.cleaned_data['sales'])  
+        if not sales:
+            raise forms.ValidationError(self.cleaned_data['office'].city + ' doesn\'t have sales named by'+ self.cleaned_data['sales'].full_name + '. Change office or sales selection please!')
+        else:
+            logger.debug('self.status %s, self.__original_status = %s,', self.cleaned_data['office'], self.cleaned_data['sales'])  
+        property = Property.objects.get(project=self.cleaned_data['project'], lot= self.cleaned_data['project_lot'].lot)
+        if not property:
+            raise forms.ValidationError(self.cleaned_data['project'].name + ' doesn\'t have the lot:'+ self.cleaned_data['project_lot'].lot + '. Change project or lot selection please!')
+        return self.cleaned_data
+'''
+
 class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
         ('Sales Info',       {'fields': (('office','sales'),)}), 
@@ -83,6 +103,7 @@ class PurchaseAdmin(ImportExportModelAdmin):
     search_fields = ['project','sales', 'client', 'office']
     
     resource_class = PurchaseResource
-    
+#    form = PurchaseAdminForm
+     
 admin.site.register(Purchase,PurchaseAdmin)
 
