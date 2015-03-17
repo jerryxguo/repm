@@ -136,3 +136,49 @@
 [17/Mar/2015 14:19:10] DEBUG [config.signals:45] sales.number_of_year_sales =  1 
 [17/Mar/2015 14:19:10] DEBUG [config.signals:68] update_project spring propertys = 2 type = <type 'int'>, 
 [17/Mar/2015 14:19:10] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:25:54] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 1
+[17/Mar/2015 14:26:12] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 1
+[17/Mar/2015 14:26:12] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:26:12] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:27:14] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:27:14] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:27:14] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:27:14] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:29:26] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:29:26] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:29:26] DEBUG [config.signals:67] update_project spring propertys = 3 type = <type 'int'>, 
+[17/Mar/2015 14:29:26] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:31:03] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:31:03] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:31:03] DEBUG [config.signals:67] update_project spring propertys = 3 type = <type 'int'>, 
+[17/Mar/2015 14:31:03] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:42:58] DEBUG [config.signals:85] DO delete_sales michael, client = client1, lot = 3
+[17/Mar/2015 14:42:58] DEBUG [config.signals:70] update_project spring propertys = 3 type = <type 'int'>, 
+[17/Mar/2015 14:42:58] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:43:05] DEBUG [config.signals:85] DO delete_sales michael, client = client1, lot = 1
+[17/Mar/2015 14:43:05] DEBUG [config.signals:70] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:43:05] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:43:05] DEBUG [config.signals:85] DO delete_sales michael, client = client1, lot = 2
+[17/Mar/2015 14:43:05] DEBUG [config.signals:70] update_project spring propertys = 2 type = <type 'int'>, 
+[17/Mar/2015 14:43:05] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:44:50] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:44:50] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:44:50] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:44:50] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:45:36] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:45:36] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:45:36] DEBUG [config.signals:67] update_project spring propertys = 2 type = <type 'int'>, 
+[17/Mar/2015 14:45:36] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:46:00] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 2
+[17/Mar/2015 14:46:00] DEBUG [config.signals:67] update_project spring propertys = 2 type = <type 'int'>, 
+[17/Mar/2015 14:46:00] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:46:00] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 1
+[17/Mar/2015 14:46:00] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:46:00] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:46:24] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 14:46:24] DEBUG [config.signals:74] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 14:46:24] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:46:24] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 14:47:10] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 1
+[17/Mar/2015 14:47:10] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 14:47:10] DEBUG [config.models:142] self.status --, self.__original_status = --,

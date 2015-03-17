@@ -13,10 +13,10 @@ from config.models import Plan
 
 class SalesInline(admin.StackedInline):
     fieldsets = [
-        ('Sales Info',    {'fields': (('full_name','email','mobile'),('start_date', 'referrer'),('leader','director','on_board',),)}), 
-        ('Bonus Info',    {'fields': (('annual_sales','annual_bonus','total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid'),),'classes': ['collapse']}),       
+        ('Personal Info',    {'fields': (('full_name','email','mobile'),('start_date', 'referrer','leader','director','on_board',),)}), 
+        ('Bonus Info',    {'fields': (('annual_sales','annual_bonus','total_sales','accumulated_bonus','bonus_paid','date_of_paid','accum_bonus_unpaid'),),'classes': ['collapse']}),       
     ]
-    readonly_fields = ('annual_sales','total_sales','accumulated_bonus','bonus_unpaid','annual_bonus')
+    readonly_fields = ('annual_sales','total_sales','accumulated_bonus','accum_bonus_unpaid','annual_bonus')
     model = Sales
     extra = 3
         

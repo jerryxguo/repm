@@ -6,6 +6,7 @@ from config.models import Plan
 from config.models import Property
 from sales.models import Purchase
 from sales.models import Client
+from sales.models import Office
 from django.core.mail import send_mail
 
 import logging
@@ -14,9 +15,8 @@ logger = logging.getLogger(__name__)
    
 # update sales's achievement
 def update_sales(instance):       
-    sales = Sales.objects.get(full_name=instance.sales)    
+    sales = Sales.objects.get(full_name=instance.sales)
     if sales:
-        
         purchases = Purchase.objects.filter(sales=instance.sales)
         if purchases:
             if len(purchases) != sales.number_of_sales:
@@ -31,7 +31,7 @@ def update_sales(instance):
             
             for plan in bonus_plan:
                 if plan.plan_type=='AB':
-                    if(sales.number_of_sales>=plan.number_of_sales):
+                    if sales.number_of_sales>=plan.number_of_sales:
                         accum_bonus = accum_bonus + plan.bonus
                 else:
                     delta  = datetime.date.today() - sales.start_date
@@ -42,7 +42,7 @@ def update_sales(instance):
                             p = Purchase.objects.filter(sales=instance.sales, date_of_contract_signed__year=plan.year)                        
                             sales.number_of_year_sales = len(p)
                             #logger.debug('sales.number_of_year_sales =  %s ',  str(sales.number_of_year_sales))
-                            if(sales.number_of_year_sales>=plan.number_of_sales):
+                            if sales.number_of_year_sales>=plan.number_of_sales and sales.on_board is True:
                                 annual_bonus = annual_bonus + plan.bonus*plan.number_of_sales
                 
             sales.year_bonus = annual_bonus
@@ -50,6 +50,8 @@ def update_sales(instance):
         else:
             sales.accumulation_bonus = 0
             sales.year_bonus = 0
+            sales.number_of_sales = 0
+            sales.number_of_year_sales = 0
         sales.save()
             
 # update client's holdings           

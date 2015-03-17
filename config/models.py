@@ -51,16 +51,16 @@ class Sales(models.Model):
     def _get_accumulated_bonus(self):        
         return self.accumulation_bonus 
     accumulated_bonus = property(_get_accumulated_bonus)
-    bonus_paid = models.IntegerField(default=0, blank=True, null=True)
+    bonus_paid = models.IntegerField('Accum bonus paid',default=0, blank=True, null=True)
     date_of_paid = models.DateField( blank=True, null = True)
 
-    def _get_bonus_unpaid(self):
+    def _get_accum_bonus_unpaid(self):
         if self.accumulation_bonus is None:
             self.accumulation_bonus = 0
         if self.bonus_paid is None:
             self.bonus_paid = 0    
         return (self.accumulation_bonus - self.bonus_paid)
-    bonus_unpaid = property(_get_bonus_unpaid)
+    accum_bonus_unpaid = property(_get_accum_bonus_unpaid)
     
     leader = models.BooleanField(default=False)
     director =  models.BooleanField(default=False)
