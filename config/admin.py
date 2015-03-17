@@ -5,17 +5,18 @@ from config.models import Property
 from config.models import Client
 from config.models import Sales
 from config.models import Office
-from config.models import Bonus
+from config.models import Plan
 
 # Register your models here.
 #########################################
 #sales#
 
-class SalesInline(admin.TabularInline):
+class SalesInline(admin.StackedInline):
     fieldsets = [
-        ('Sales Info',    {'fields': (('full_name','email','mobile','start_date', 'total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid','leader','director','on_board','referrer'),)}),       
+        ('Sales Info',    {'fields': (('full_name','email','mobile'),('start_date', 'referrer'),('leader','director','on_board',),)}), 
+        ('Bonus Info',    {'fields': (('annual_sales','annual_bonus','total_sales','accumulated_bonus','bonus_paid','date_of_paid','bonus_unpaid'),),'classes': ['collapse']}),       
     ]
-    readonly_fields = ('total_sales','accumulated_bonus','bonus_unpaid',)
+    readonly_fields = ('annual_sales','total_sales','accumulated_bonus','bonus_unpaid','annual_bonus')
     model = Sales
     extra = 3
         
@@ -27,12 +28,13 @@ class OfficeAdmin(admin.ModelAdmin):
     ]
     list_display = ('city', 'independent', 'phone')
     inlines = [SalesInline]
-    
+
+        
 admin.site.register(Office,OfficeAdmin)
 ###############################
 class SalesAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),)}),       
+        ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),('start_date','leader'),('director','referrer'))}),       
     ]
     
    
@@ -93,12 +95,12 @@ class ClientAdmin(admin.ModelAdmin):
 admin.site.register(Client,ClientAdmin)
 
 
-class BonusAdmin(admin.ModelAdmin):
+class PlanAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Bonus Plan',    {'fields': (('number_of_sales','bonus'),)}),
+        ('Bonus Plan',    {'fields': (('plan_type', 'year', 'number_of_sales', 'bonus'),)}),
        
     ]
-    list_display = ('number_of_sales','bonus')
+    list_display = ('plan_type', 'year', 'number_of_sales','bonus')
     
-admin.site.register(Bonus,BonusAdmin)
+admin.site.register(Plan,PlanAdmin)

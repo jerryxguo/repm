@@ -14,12 +14,13 @@ class Migration(migrations.Migration):
             name='Bonus',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('number_of_sales', models.IntegerField(default=0, verbose_name=b'Number of Sales')),
-                ('bonus', models.IntegerField(default=0, verbose_name=b'Bonus(AUS)')),
+                ('annual_bonus', models.IntegerField(default=0, null=True, blank=True)),
+                ('accumulation_bonus', models.IntegerField(default=0, null=True, blank=True)),
+                ('bonus_paid', models.IntegerField(default=0, null=True, blank=True)),
+                ('date_of_paid', models.DateField(null=True, blank=True)),
             ],
             options={
-                'verbose_name': 'Bonue Plan',
-                'verbose_name_plural': 'Bonue Plan',
+                'verbose_name_plural': 'Bonus',
             },
             bases=(models.Model,),
         ),
@@ -27,9 +28,9 @@ class Migration(migrations.Migration):
             name='Client',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('full_name', models.CharField(max_length=30)),
+                ('full_name', models.CharField(unique=True, max_length=30)),
                 ('number', models.IntegerField(default=0)),
-                ('email', models.EmailField(max_length=75, blank=True)),
+                ('email', models.EmailField(unique=True, max_length=75, blank=True)),
                 ('mobile', models.CharField(max_length=10, blank=True)),
             ],
             options={
@@ -41,14 +42,26 @@ class Migration(migrations.Migration):
             name='Office',
             fields=[
                 ('city', models.CharField(max_length=20, unique=True, serialize=False, primary_key=True)),
-                ('exclude', models.BooleanField(default=False)),
+                ('independent', models.BooleanField(default=False)),
                 ('address', models.CharField(max_length=40, null=True, blank=True)),
-                ('state', models.CharField(max_length=10, null=True, blank=True)),
                 ('country', models.CharField(max_length=10, null=True, blank=True)),
-                ('phone', models.CharField(max_length=10, null=True, verbose_name=b'Contact Phone Number', blank=True)),
+                ('phone', models.CharField(max_length=10, null=True, verbose_name=b'Contact Phone', blank=True)),
             ],
             options={
                 'verbose_name_plural': 'Office',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Plan',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('number_of_sales', models.IntegerField(default=0, verbose_name=b'Number of Sales')),
+                ('bonus', models.IntegerField(default=0, verbose_name=b'Bonus(AUS)')),
+            ],
+            options={
+                'verbose_name': 'Bonue Plan',
+                'verbose_name_plural': 'Bonue Plan',
             },
             bases=(models.Model,),
         ),
@@ -86,20 +99,23 @@ class Migration(migrations.Migration):
                 ('full_name', models.CharField(max_length=30, unique=True, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=75)),
                 ('mobile', models.CharField(max_length=10)),
+                ('start_date', models.DateField(null=True, blank=True)),
                 ('number_of_sales', models.IntegerField(default=0, null=True, blank=True)),
-                ('accumulation_bonus', models.IntegerField(default=0, null=True, blank=True)),
-                ('bonus_paid', models.IntegerField(default=0, null=True, blank=True)),
-                ('date_of_paid', models.DateField(null=True, blank=True)),
                 ('leader', models.BooleanField(default=False)),
-                ('is_director', models.BooleanField(default=False)),
+                ('director', models.BooleanField(default=False)),
                 ('on_board', models.BooleanField(default=True)),
                 ('referrer', models.CharField(max_length=30, null=True, verbose_name=b'Referer', blank=True)),
+                ('bonus', models.ForeignKey(to='config.Bonus')),
                 ('office', models.ForeignKey(to='config.Office')),
             ],
             options={
                 'verbose_name_plural': 'Sales',
             },
             bases=(models.Model,),
+        ),
+        migrations.AlterUniqueTogether(
+            name='sales',
+            unique_together=set([('office', 'full_name')]),
         ),
         migrations.AddField(
             model_name='property',
@@ -112,5 +128,9 @@ class Migration(migrations.Migration):
             name='project',
             field=models.ForeignKey(to='config.Project'),
             preserve_default=True,
+        ),
+        migrations.AlterUniqueTogether(
+            name='property',
+            unique_together=set([('project', 'lot')]),
         ),
     ]

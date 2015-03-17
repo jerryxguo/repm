@@ -21,6 +21,7 @@ class Office(models.Model):
         return self.city
     class Meta:
         verbose_name_plural  = 'Office'
+
         
 
 class Sales(models.Model):
@@ -30,10 +31,22 @@ class Sales(models.Model):
     mobile = models.CharField(max_length=10)
     office = models.ForeignKey(Office)
     start_date = models.DateField( blank=True, null = True)
+    
+    number_of_year_sales  = models.IntegerField(default=0, blank=True, null=True)
+    def _get_annual_sales(self):        
+        return self.number_of_year_sales 
+    annual_sales = property(_get_annual_sales)
+    
+    year_bonus = models.IntegerField(default=0, blank=True,  null=True)  
+    def _get_annual_bonus(self):        
+        return self.year_bonus 
+    annual_bonus = property(_get_annual_bonus)
+    
     number_of_sales = models.IntegerField(default=0, blank=True, null=True)
     def _get_total_sales(self):        
         return self.number_of_sales 
     total_sales = property(_get_total_sales)
+    
     accumulation_bonus = models.IntegerField(default=0, blank=True,  null=True)  
     def _get_accumulated_bonus(self):        
         return self.accumulation_bonus 
@@ -133,9 +146,20 @@ class Property(models.Model):
             self.__original_status = self.status
         super(Property, self).save()
         
-class Bonus(models.Model):
-    
-    number_of_sales = models.IntegerField('Number of Sales', default=0)    
+class Plan(models.Model):
+    BONUS_TYPE_CHOICES = (
+        ('LB', 'LOYALTY BONUS'),
+        ('OB', 'OUTSTANDING BONUS'),
+        ('AB', 'ACCUMULATION BONUS'),       
+    )
+    plan_type = models.CharField(max_length=2, choices=BONUS_TYPE_CHOICES, default ='LB') 
+    YEAR_CHOICES = []
+    for r in range(datetime.datetime.now().year, (datetime.datetime.now().year+2)):
+        YEAR_CHOICES.append((r,r))
+
+    year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=None , blank=True, null = True )
+
+    number_of_sales = models.IntegerField('Least Number of Sales', default=0)    
     bonus = models.IntegerField('Bonus(AUS)', default=0)
     
     class Meta:

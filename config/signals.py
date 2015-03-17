@@ -2,7 +2,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from config.models import Sales
-from config.models import Bonus
+from config.models import Plan
 from config.models import Property
 from sales.models import Purchase
 from sales.models import Client
@@ -20,7 +20,7 @@ def update_sales(instance):
     if purchases and sales:
         if len(purchases) != sales.number_of_sales:
             sales.number_of_sales = len(purchases)
-            bonus_plan = Bonus.objects.all().order_by('number_of_sales')
+            bonus_plan = Plan.objects.all().order_by('number_of_sales')
             bonus = 0
             
             for plan in bonus_plan:

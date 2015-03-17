@@ -10,7 +10,12 @@ from sales.models import Purchase
 from config.models import Client
 from config.models import Sales
 # Create your views here.
-# Create your views here.
+def index(request):
+    template_name = 'index.html'
+    return HttpResponseRedirect(reverse('view_blog', args=(),
+    kwargs={})
+
+    # Create your views here.
 class PurchaseView(generic.ListView):
     template_name = 'sales/purchase.html'
     context_object_name = 'latest_purchase_list'

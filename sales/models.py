@@ -9,7 +9,7 @@ from config.models import Property
 from config.models import Client
 from config.models import Sales
 from config.models import Office
-from config.models import Bonus
+
 
 import logging
 logger = logging.getLogger(__name__)

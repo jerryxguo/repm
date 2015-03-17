@@ -7,13 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('config', '0002_auto_20150314_1338'),
+        ('config', '0003_auto_20150317_1107'),
     ]
 
     operations = [
-        migrations.RenameField(
+        migrations.AddField(
             model_name='sales',
-            old_name='is_director',
-            new_name='director',
+            name='annual_bonus',
+            field=models.IntegerField(default=0, null=True, blank=True),
+            preserve_default=True,
         ),
     ]
