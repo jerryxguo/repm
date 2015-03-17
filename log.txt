@@ -182,3 +182,7 @@
 [17/Mar/2015 14:47:10] DEBUG [config.signals:82] DO delete_sales michael, client = client1, lot = 1
 [17/Mar/2015 14:47:10] DEBUG [config.signals:67] update_project spring propertys = 1 type = <type 'int'>, 
 [17/Mar/2015 14:47:10] DEBUG [config.models:142] self.status --, self.__original_status = --,
+[17/Mar/2015 15:33:58] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
+[17/Mar/2015 15:33:58] DEBUG [config.signals:76] DO add_sales michael, raw = False, update_fields = None
+[17/Mar/2015 15:33:58] DEBUG [config.signals:69] update_project spring propertys = 1 type = <type 'int'>, 
+[17/Mar/2015 15:33:58] DEBUG [config.models:142] self.status --, self.__original_status = --,

@@ -69,6 +69,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+  #  'grappelli.dashboard',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -92,6 +94,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    "django.core.context_processors.request",
+  #  "django.core.context_processors.i18n",
+  #  'django.contrib.messages.context_processors.messages',
+)
 ROOT_URLCONF = 'repm.urls'
 
 WSGI_APPLICATION = 'repm.wsgi.application'
@@ -128,4 +136,4 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-STATIC_ROOT = 'C:\workspace\django\repm\static'
+STATIC_ROOT = 'C:/workspace/django/open/repm/static'
