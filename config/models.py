@@ -148,9 +148,8 @@ class Property(models.Model):
         
 class Plan(models.Model):
     BONUS_TYPE_CHOICES = (
-        ('LB', 'LOYALTY BONUS'),
-        ('OB', 'OUTSTANDING BONUS'),
-        ('AB', 'ACCUMULATION BONUS'),       
+        ('LB', 'LOYALTY BONUS'),     
+        ('AB', 'ACCUMULATION BONUS'),
     )
     plan_type = models.CharField(max_length=2, choices=BONUS_TYPE_CHOICES, default ='LB') 
     YEAR_CHOICES = []

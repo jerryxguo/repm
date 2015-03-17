@@ -1,4 +1,4 @@
-
+import datetime
 from django.db import models
 from django.core.exceptions import ValidationError
 from config.models import Sales
@@ -13,23 +13,44 @@ logger = logging.getLogger(__name__)
 
    
 # update sales's achievement
-def update_sales(instance):    
-    purchases = Purchase.objects.filter(sales=instance.sales)
-    sales = Sales.objects.get(full_name=instance.sales)
-    
-    if purchases and sales:
-        if len(purchases) != sales.number_of_sales:
+def update_sales(instance):       
+    sales = Sales.objects.get(full_name=instance.sales)    
+    if sales:
+        
+        purchases = Purchase.objects.filter(sales=instance.sales)
+        if purchases:
+            if len(purchases) != sales.number_of_sales:
+                #send_mail('Subject here', 'Here is the message.', 'xguo10@tpg.com.au',['xguo10@tpg.com.au'], fail_silently=False)
+                print 'send email'
+                
             sales.number_of_sales = len(purchases)
+            
             bonus_plan = Plan.objects.all().order_by('number_of_sales')
-            bonus = 0
+            accum_bonus = 0
+            annual_bonus = 0
             
             for plan in bonus_plan:
-                if(sales.number_of_sales>=plan.number_of_sales):
-                    bonus = bonus + plan.bonus
-            if sales.accumulation_bonus!= bonus:
-                sales.accumulation_bonus = bonus
-                #send_mail('Subject here', 'Here is the message.', 'xguo10@tpg.com.au',['xguo10@tpg.com.au'], fail_silently=False)
-            sales.save()
+                if plan.plan_type=='AB':
+                    if(sales.number_of_sales>=plan.number_of_sales):
+                        accum_bonus = accum_bonus + plan.bonus
+                else:
+                    delta  = datetime.date.today() - sales.start_date
+                    #logger.debug('delta.days =  %s ',  str(delta.days))
+                    if delta.days >=365:
+                        #logger.debug('plan.year =  %s ',  plan.year)
+                        if plan.year:
+                            p = Purchase.objects.filter(sales=instance.sales, date_of_contract_signed__year=plan.year)                        
+                            sales.number_of_year_sales = len(p)
+                            #logger.debug('sales.number_of_year_sales =  %s ',  str(sales.number_of_year_sales))
+                            if(sales.number_of_year_sales>=plan.number_of_sales):
+                                annual_bonus = annual_bonus + plan.bonus*plan.number_of_sales
+                
+            sales.year_bonus = annual_bonus
+            sales.accumulation_bonus = accum_bonus            
+        else:
+            sales.accumulation_bonus = 0
+            sales.year_bonus = 0
+        sales.save()
             
 # update client's holdings           
 def update_client(instance):
