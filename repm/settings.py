@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'sales',
     'import_export',
     'smart_selects',
+    'daterange_filter'
     
 )
 

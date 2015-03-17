@@ -6,7 +6,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from import_export import widgets
 from import_export import fields
-
+from daterange_filter.filter import DateRangeFilter
 from sales.models import Purchase
 
 from config.models import Project
@@ -99,7 +99,7 @@ class PurchaseAdmin(ImportExportModelAdmin):
     'date_of_contract_exchanged','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1',\
     'commission_1_date','commission_2','commission_2_date', 'commission_total', 'tyler_commission_1', \
     'tyler_commission_1_date','tyler_commission_2', 'tyler_commission_2_date', 'tyler_commission_total','bonus','client_email','note','letter1','letter2','letter3')
-    list_filter = ['project','office','sales','date_of_contract_received', 'date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional','date_of_settlement']
+    list_filter = ['project','office','sales',('date_of_contract_received',DateRangeFilter), ('date_of_contract_signed', DateRangeFilter),('date_of_contract_exchanged', DateRangeFilter),('date_of_contract_unconditional', DateRangeFilter),('date_of_settlement', DateRangeFilter)]
     search_fields = ['project__name','sales__full_name', 'client__full_name', 'office__city']
     
     resource_class = PurchaseResource
