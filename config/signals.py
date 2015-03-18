@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 # update sales's achievement
 def update_sales(instance):       
     sales = Sales.objects.get(full_name=instance.sales)
+    #send_mail('Subject here', 'Here is the message.', 'xguo10@tpg.com.au',['xguo10@tpg.com.au'], fail_silently=False)
     if sales:
         purchases = Purchase.objects.filter(sales=instance.sales)
         if purchases:
@@ -39,7 +40,7 @@ def update_sales(instance):
                     if delta.days >=365:
                         #logger.debug('plan.year =  %s ',  plan.year)
                         if plan.year:
-                            p = Purchase.objects.filter(sales=instance.sales, date_of_contract_signed__year=plan.year)                        
+                            p = Purchase.objects.filter(sales=instance.sales, date_of_EOI_sent__year=plan.year)                        
                             sales.number_of_year_sales = len(p)
                             #logger.debug('sales.number_of_year_sales =  %s ',  str(sales.number_of_year_sales))
                             if sales.number_of_year_sales>=plan.number_of_sales and sales.on_board is True:
@@ -72,7 +73,7 @@ def update_property(instance):
     property.lot_client = instance.client
     property.save()
     
-def save_sales(sender, instance, created, raw, using, update_fields, **kwargs):
+def save_purchase(sender, instance, created, raw, using, update_fields, **kwargs):
     logger.debug('DO add_sales %s, raw = %s, update_fields = %s', instance.sales, raw, update_fields)     
     if instance.office.independent is False:
         update_sales(instance)
@@ -80,7 +81,7 @@ def save_sales(sender, instance, created, raw, using, update_fields, **kwargs):
     update_property(instance)
    
     
-def delete_sales(sender, instance, using, **kwargs):
+def delete_purchase(sender, instance, using, **kwargs):
     logger.debug('DO delete_sales %s, client = %s, lot = %s', instance.sales, instance.client, instance.project_lot)
     if instance.office.independent is False:
         update_sales(instance)
@@ -88,7 +89,7 @@ def delete_sales(sender, instance, using, **kwargs):
     update_property(instance)        
            
 
-models.signals.post_save.connect(save_sales, sender=Purchase)
-models.signals.post_delete.connect(delete_sales, sender=Purchase)
+models.signals.post_save.connect(save_purchase, sender=Purchase)
+models.signals.post_delete.connect(delete_purchase, sender=Purchase)
 
 

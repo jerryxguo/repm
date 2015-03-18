@@ -18,7 +18,7 @@ class SalesInline(admin.StackedInline):
     ]
     readonly_fields = ('annual_sales','total_sales','accumulated_bonus','accum_bonus_unpaid','annual_bonus')
     model = Sales
-    extra = 3
+    extra = 0
         
 
 class OfficeAdmin(admin.ModelAdmin):
@@ -34,7 +34,7 @@ admin.site.register(Office,OfficeAdmin)
 ###############################
 class SalesAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),('start_date','leader'),('director','referrer'))}),       
+        ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),('start_date','referrer'),('leader','director'))}),       
     ]
     
    
@@ -54,7 +54,7 @@ class PropertyInline(admin.TabularInline):
         ('Property Info',    {'fields': (('project','lot','price','sales','client','status','status_date'),)}),       
     ]
     model = Property
-    extra = 3
+    extra = 0
     readonly_fields = ('status_date','sales','client')    
 
 class ProjectAdmin(admin.ModelAdmin):

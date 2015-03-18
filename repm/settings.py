@@ -138,3 +138,8 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 STATIC_ROOT = 'C:/workspace/django/open/repm/static'
+
+#email settings
+EMAIL_HOST = 'mail.tpg.com.au'
+EMAIL_HOST_USER ='xguo10@tpg.com.au'
+EMAIL_HOST_PASSWORD = 'xguo2010'

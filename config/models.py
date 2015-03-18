@@ -30,7 +30,7 @@ class Sales(models.Model):
     email = models.EmailField()
     mobile = models.CharField(max_length=10)
     office = models.ForeignKey(Office)
-    start_date = models.DateField( blank=True, null = True)
+    start_date = models.DateField(default =timezone.now(), blank=True, null = True)
     
     number_of_year_sales  = models.IntegerField(default=0, blank=True, null=True)
     def _get_annual_sales(self):        
@@ -70,10 +70,22 @@ class Sales(models.Model):
     def __unicode__(self):
         return self.full_name
     class Meta:        
-        verbose_name_plural  = 'Sales'
+        verbose_name_plural  = 'Consultants'
+        verbose_name  = 'Consultant:'
         unique_together = (("office", "full_name"),)
-            
-            
+
+'''   
+    def save(self, *args, **kwargs):
+        if self.leader is True:
+            try:
+                temp = Sales.objects.get(leader=True)
+                if self != temp:
+                    temp.leader = False
+                    temp.save()
+            except Sales.DoesNotExist:
+                pass
+        super(Sales, self).save(*args, **kwargs)        
+'''            
 class Client(models.Model):
     full_name = models.CharField(max_length=30, unique = True)
     number = models.IntegerField(default=0)
@@ -162,8 +174,8 @@ class Plan(models.Model):
     bonus = models.IntegerField('Bonus(AUS)', default=0)
     
     class Meta:
-        verbose_name_plural  = 'Bonue Plan'
-        verbose_name  = 'Bonue Plan'
+        verbose_name_plural  = 'Bonus Plan'
+        verbose_name  = 'Bonus Plan'
         
     def __unicode__(self):
         return 'Bonus Plan'
