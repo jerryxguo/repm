@@ -142,4 +142,6 @@ STATIC_ROOT = 'C:/workspace/django/open/repm/static'
 #email settings
 EMAIL_HOST = 'mail.tpg.com.au'
 EMAIL_HOST_USER ='xguo10@tpg.com.au'
-EMAIL_HOST_PASSWORD = 'xguo2010'
+EMAIL_HOST_PASSWORD = 'xguo2000'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

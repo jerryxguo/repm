@@ -47,3 +47,9 @@
 [18/Mar/2015 11:20:13] DEBUG [config.models:154] self.status --, self.__original_status = --,
 [18/Mar/2015 11:33:31] DEBUG [config.models:154] self.status CR, self.__original_status = --,
 [18/Mar/2015 11:33:41] DEBUG [config.models:154] self.status CU, self.__original_status = CR,
+[18/Mar/2015 11:45:20] DEBUG [sales.models:82] clean.office Sydney, self.sales = jerry,
+[18/Mar/2015 11:45:20] DEBUG [config.signals:77] DO add_sales jerry, raw = False, update_fields = None
+[18/Mar/2015 11:47:55] DEBUG [sales.models:82] clean.office Sydney, self.sales = jerry,
+[18/Mar/2015 11:47:55] DEBUG [config.signals:77] DO add_sales jerry, raw = False, update_fields = None
+[18/Mar/2015 11:47:59] DEBUG [config.signals:70] update_project syndey propertys = 2 type = <type 'int'>, 
+[18/Mar/2015 11:47:59] DEBUG [config.models:154] self.status --, self.__original_status = --,
