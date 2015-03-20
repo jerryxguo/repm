@@ -1,55 +1,48 @@
-[18/Mar/2015 10:44:57] DEBUG [sales.models:82] clean.office hq, self.sales = niah,
-[18/Mar/2015 10:44:57] DEBUG [config.signals:77] DO add_sales niah, raw = False, update_fields = None
-[18/Mar/2015 10:47:42] DEBUG [sales.models:82] clean.office hq, self.sales = niah,
-[18/Mar/2015 10:47:42] DEBUG [config.signals:77] DO add_sales niah, raw = False, update_fields = None
-[18/Mar/2015 10:50:25] DEBUG [sales.models:82] clean.office hq, self.sales = niah,
-[18/Mar/2015 10:50:25] DEBUG [config.signals:77] DO add_sales niah, raw = False, update_fields = None
-[18/Mar/2015 11:03:14] DEBUG [config.signals:85] DO delete_sales michael, client = client1, lot = 1
-[18/Mar/2015 11:03:14] DEBUG [config.signals:70] update_project spring propertys = 1 type = <type 'int'>, 
-[18/Mar/2015 11:03:14] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:04:55] DEBUG [sales.models:82] clean.office hq, self.sales = niah,
-[18/Mar/2015 11:04:55] DEBUG [config.signals:77] DO add_sales niah, raw = False, update_fields = None
-[18/Mar/2015 11:04:55] DEBUG [config.signals:70] update_project spring propertys = 1 type = <type 'int'>, 
-[18/Mar/2015 11:04:55] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:05:38] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:06:24] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:06:24] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:06:24] DEBUG [config.signals:70] update_project spring propertys = 2 type = <type 'int'>, 
-[18/Mar/2015 11:06:24] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:07:19] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:07:19] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:07:19] DEBUG [config.signals:70] update_project spring propertys = 2 type = <type 'int'>, 
-[18/Mar/2015 11:07:19] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:10:24] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:10:24] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:10:24] DEBUG [config.signals:70] update_project spring propertys = 2 type = <type 'int'>, 
-[18/Mar/2015 11:10:24] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:12:13] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:12:13] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:12:13] DEBUG [config.signals:70] update_project spring propertys = 3 type = <type 'int'>, 
-[18/Mar/2015 11:12:13] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:12:43] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:12:43] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:12:43] DEBUG [config.signals:70] update_project spring propertys = 3 type = <type 'int'>, 
-[18/Mar/2015 11:12:43] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:12:51] DEBUG [sales.models:82] clean.office hq, self.sales = michael,
-[18/Mar/2015 11:12:51] DEBUG [config.signals:77] DO add_sales michael, raw = False, update_fields = None
-[18/Mar/2015 11:12:51] DEBUG [config.signals:70] update_project spring propertys = 3 type = <type 'int'>, 
-[18/Mar/2015 11:12:51] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:17:30] DEBUG [sales.models:82] clean.office Sydney, self.sales = fd,
-[18/Mar/2015 11:17:56] DEBUG [sales.models:82] clean.office Sydney, self.sales = dd,
-[18/Mar/2015 11:18:18] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:18:22] DEBUG [sales.models:82] clean.office Sydney, self.sales = dd,
-[18/Mar/2015 11:18:22] DEBUG [config.signals:77] DO add_sales dd, raw = False, update_fields = None
-[18/Mar/2015 11:20:13] DEBUG [sales.models:82] clean.office Sydney, self.sales = dd,
-[18/Mar/2015 11:20:13] DEBUG [config.signals:77] DO add_sales dd, raw = False, update_fields = None
-[18/Mar/2015 11:20:13] DEBUG [config.signals:70] update_project syndey propertys = 1 type = <type 'int'>, 
-[18/Mar/2015 11:20:13] DEBUG [config.models:154] self.status --, self.__original_status = --,
-[18/Mar/2015 11:33:31] DEBUG [config.models:154] self.status CR, self.__original_status = --,
-[18/Mar/2015 11:33:41] DEBUG [config.models:154] self.status CU, self.__original_status = CR,
-[18/Mar/2015 11:45:20] DEBUG [sales.models:82] clean.office Sydney, self.sales = jerry,
-[18/Mar/2015 11:45:20] DEBUG [config.signals:77] DO add_sales jerry, raw = False, update_fields = None
-[18/Mar/2015 11:47:55] DEBUG [sales.models:82] clean.office Sydney, self.sales = jerry,
-[18/Mar/2015 11:47:55] DEBUG [config.signals:77] DO add_sales jerry, raw = False, update_fields = None
-[18/Mar/2015 11:47:59] DEBUG [config.signals:70] update_project syndey propertys = 2 type = <type 'int'>, 
-[18/Mar/2015 11:47:59] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 13:53:32] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 13:53:32] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 13:53:32] DEBUG [config.signals:30] template path \email\email_consultant.txt
+[20/Mar/2015 13:54:25] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 13:54:25] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 13:54:25] DEBUG [config.signals:29] template path C:\workspace\django\open\repm\templates\email\email_consultant.txt
+[20/Mar/2015 13:54:25] DEBUG [config.signals:31] template path \email\email_consultant.txt
+[20/Mar/2015 13:55:31] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 13:55:31] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 13:55:31] DEBUG [config.signals:29] template path C:\workspace\django\open\repm\templates\email\email_consultant.txt
+[20/Mar/2015 13:55:31] DEBUG [config.signals:31] template path email\email_consultant.txt
+[20/Mar/2015 13:55:31] DEBUG [config.signals:36] plaintext = <django.template.base.Template object at 0x0000000004577F60> from Dear michael,
+
+Congratulation for your success in the sale of spring - lot:4. We wish you more successes in future.
+
+Regards,
+Jeniffer
+[20/Mar/2015 13:56:03] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 13:56:03] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 13:56:03] DEBUG [config.signals:29] template path C:\workspace\django\open\repm\templates\email\email_consultant.txt
+[20/Mar/2015 13:56:03] DEBUG [config.signals:31] template path email\email_consultant.txt
+[20/Mar/2015 13:56:03] DEBUG [config.signals:36] plaintext = <django.template.base.Template object at 0x0000000004517F60> from Dear michael,
+
+Congratulation for your success in the sale of spring - lot:4. We wish you more successes in future.
+
+Regards,
+Jeniffer
+[20/Mar/2015 13:56:03] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:19:37] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:19:41] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 14:19:41] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 14:19:41] DEBUG [config.signals:38] plaintext = (u'jerry_xguo@yahoo.com',) from (u'xguo10@tpg.com.au',)
+[20/Mar/2015 14:21:02] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 14:21:02] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 14:21:02] DEBUG [config.signals:38] plaintext = (u'jerry_xguo@yahoo.com',) from (u'xguo10@tpg.com.au',)
+[20/Mar/2015 14:21:02] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:25:25] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:25:29] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 14:25:29] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 14:25:29] DEBUG [config.signals:38] bcc = (u'jerry_xguo@yahoo.com',) cc_list (u'xguo10@tpg.com.au',)
+[20/Mar/2015 14:25:29] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:30:45] DEBUG [config.models:154] self.status --, self.__original_status = --,
+[20/Mar/2015 14:30:48] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 14:30:48] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 14:31:36] DEBUG [sales.models:82] clean.office Sydney, self.sales = michael,
+[20/Mar/2015 14:31:36] DEBUG [config.signals:25] notify_sales_by_email 
+[20/Mar/2015 14:31:36] DEBUG [config.signals:38] bcc = None cc_list (u'xguo10@tpg.com.au',)
+[20/Mar/2015 14:31:36] DEBUG [config.models:154] self.status --, self.__original_status = --,

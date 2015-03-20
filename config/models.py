@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from smart_selects.db_fields import ChainedForeignKey
-
+from django.conf import settings
 import logging
 logger = logging.getLogger(__name__)
 
@@ -179,3 +179,24 @@ class Plan(models.Model):
         
     def __unicode__(self):
         return 'Bonus Plan'
+
+class Notification(models.Model):
+    NOTIFY_TYPE_CHOICES = (
+        ('NS', 'NOTIFY_CONSULTANT'),     
+        ('NA', 'NOTIFY_ADMIN'),
+        ('NC', 'NOTIFY_CLIENT'),
+    )
+    notify_type = models.CharField(max_length=2, choices=NOTIFY_TYPE_CHOICES, default ='NS') 
+    subject = models.CharField(max_length=30, blank=True, null = True)
+    sender = models.CharField(max_length=30, blank=True, null = True)
+    cc_list = models.CharField(max_length=200, blank=True, null = True) 
+    bcc_list  = models.CharField(max_length=200, blank=True, null = True) 
+
+    template = models.FilePathField(path=settings.TEMPLATE_DIRS[1])
+    
+    class Meta:
+        verbose_name_plural  = 'Notify'
+        verbose_name  = 'Notify'
+        
+    def __unicode__(self):
+        return 'Notify' 

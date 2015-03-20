@@ -81,7 +81,8 @@ INSTALLED_APPS = (
     'sales',
     'import_export',
     'smart_selects',
-    'daterange_filter'
+    'daterange_filter',
+    'asyn_mail',
     
 )
 
@@ -108,14 +109,24 @@ WSGI_APPLICATION = 'repm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'repm',
+        'USER': 'xguo',
+        'PASSWORD': 'xguo',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    }
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -135,13 +146,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'templates\email')]
 
 STATIC_ROOT = 'C:/workspace/django/open/repm/static'
 
 #email settings
 EMAIL_HOST = 'mail.tpg.com.au'
 EMAIL_HOST_USER ='xguo10@tpg.com.au'
-EMAIL_HOST_PASSWORD = 'xguo2000'
+EMAIL_HOST_PASSWORD = 'xguo2010'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+

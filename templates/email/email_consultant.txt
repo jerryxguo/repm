@@ -1,0 +1,6 @@
+Dear {{ salesname }},
+
+Congratulation for your success in the sale of {{project}} - lot:{{lot}}. We wish you more successes in future.
+
+Regards,
+Jeniffer

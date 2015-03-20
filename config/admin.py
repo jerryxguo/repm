@@ -6,7 +6,7 @@ from config.models import Client
 from config.models import Sales
 from config.models import Office
 from config.models import Plan
-
+from config.models import Notification
 # Register your models here.
 #########################################
 #sales#
@@ -104,3 +104,13 @@ class PlanAdmin(admin.ModelAdmin):
     list_display = ('plan_type', 'year', 'number_of_sales','bonus')
     
 admin.site.register(Plan,PlanAdmin)
+
+class NotificationAdmin(admin.ModelAdmin):
+    
+    fieldsets = [
+        ('Notification Configuration',    {'fields': (('notify_type', 'subject', 'sender', 'cc_list', 'bcc_list', 'template'),)}),
+       
+    ]
+    list_display = ('notify_type', 'subject', 'sender', 'cc_list', 'bcc_list', 'template')
+    
+admin.site.register(Notification,NotificationAdmin)

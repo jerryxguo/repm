@@ -89,17 +89,14 @@ class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
         ('Sales Info',       {'fields': (('office','sales'),)}), 
         ('Property Info',    {'fields': (('project','project_lot',),)}),
-        ('Purchasing Info',  {'fields': (('client','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
+        ('Purchasing Info',  {'fields': (('client','client_email','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
         ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
         ('Others',      {'fields': (('note'),('letter1','letter2','letter3'),)}), 
         
     ]
-    
-    list_display = ('project', 'project_lot', 'price', 'office','sales', 'client', 'deposit','solicitor','date_of_contract_received','date_of_contract_signed', \
-    'date_of_contract_exchanged','date_of_contract_unconditional','date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1',\
-    'commission_1_date','commission_2','commission_2_date', 'commission_total', 'tyler_commission_1', \
-    'tyler_commission_1_date','tyler_commission_2', 'tyler_commission_2_date', 'tyler_commission_total','bonus','client_email','note','letter1','letter2','letter3')
-    list_filter = ['project','office','sales',('date_of_contract_received',DateRangeFilter), ('date_of_contract_signed', DateRangeFilter),('date_of_contract_exchanged', DateRangeFilter),('date_of_contract_unconditional', DateRangeFilter),('date_of_settlement', DateRangeFilter)]
+    readonly_fields = ('client_email',)
+    list_display = ('project', 'project_lot', 'price', 'office','sales', 'client', 'client_email','deposit','solicitor','date_of_EOI_sent','date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement','note','letter1','letter2','letter3')
+    list_filter = ['project','office','sales',('date_of_contract_received',DateRangeFilter), ('date_of_contract_signed', DateRangeFilter),('date_of_contract_exchanged', DateRangeFilter),('date_of_contract_unconditional', DateRangeFilter),('date_of_settlement', DateRangeFilter),('date_of_EOI_sent', DateRangeFilter)]
     search_fields = ['project__name','sales__full_name', 'client__full_name', 'office__city']
     
     resource_class = PurchaseResource

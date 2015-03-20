@@ -7,21 +7,52 @@ from config.models import Property
 from sales.models import Purchase
 from sales.models import Client
 from sales.models import Office
-from django.core.mail import send_mail
+from config.models import Notification
+from django.template.loader import get_template
+from django.template import Context
+from django.conf import settings
 
+if "asyn_mail" in settings.INSTALLED_APPS:
+    from asyn_mail import send_mail
+else:
+    from django.core.mail import send_mail
+        
 import logging
 logger = logging.getLogger(__name__)
 
+def notify_sales_by_email(instance):
+    notify = Notification.objects.all()
+    logger.debug('notify_sales_by_email ')
+    for n in notify:
+        if n.notify_type=='NS':
+            if n.template and instance.sales.email:
+                
+                start = n.template.find('template')
+                plaintext = get_template(n.template[start+10:])
+                
+                d = Context({ 'salesname': instance.sales.full_name,'project': instance.project,'lot': instance.project_lot })
+                text_content = plaintext.render(d)
+                
+                bcc_list = tuple(n.bcc_list.split(';')) if n.bcc_list else None
+                cc_list = tuple(n.cc_list.split(';')) if n.cc_list else None
+                logger.debug('bcc = %s cc_list %s', bcc_list,cc_list)
+                
+                send_mail(n.subject, text_content, n.sender,[instance.sales.email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+            
+
+    
    
 # update sales's achievement
 def update_sales(instance):       
+   
     sales = Sales.objects.get(full_name=instance.sales)
-    #send_mail('Subject here', 'Here is the message.', 'xguo10@tpg.com.au',['xguo10@tpg.com.au'], fail_silently=False)
     if sales:
         purchases = Purchase.objects.filter(sales=instance.sales)
         if purchases:
+            #logger.debug('sales.number_of_sales =%s, purhcases = %s ', str(sales.number_of_sales), str(len(purchases)))
             if len(purchases) != sales.number_of_sales:
                 #send_mail('Subject here', 'Here is the message.', 'xguo10@tpg.com.au',['xguo10@tpg.com.au'], fail_silently=False)
+                notify_sales_by_email(instance)
                 print 'send email'
                 
             sales.number_of_sales = len(purchases)
@@ -67,14 +98,14 @@ def update_client(instance):
 # update property           
 def update_property(instance):
     
-    logger.debug('update_project %s propertys = %s type = %s, ', instance.project.name, instance.project_lot, type(instance.project_lot.lot))  
+    #logger.debug('update_project %s propertys = %s type = %s, ', instance.project.name, instance.project_lot, type(instance.project_lot.lot))  
     property = Property.objects.get(project=instance.project.name, lot= instance.project_lot.lot)
     property.lot_sales = instance.sales
     property.lot_client = instance.client
     property.save()
     
 def save_purchase(sender, instance, created, raw, using, update_fields, **kwargs):
-    logger.debug('DO add_sales %s, raw = %s, update_fields = %s', instance.sales, raw, update_fields)     
+    #logger.debug('DO add_sales %s, raw = %s, update_fields = %s', instance.sales, raw, update_fields)
     if instance.office.independent is False:
         update_sales(instance)
     update_client(instance)
