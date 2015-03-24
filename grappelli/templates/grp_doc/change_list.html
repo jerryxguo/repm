@@ -149,7 +149,7 @@
                 <div class="grp-doc-code"><pre><code>{% filter force_escape %}
 {% templatetag openblock %} block object-tools {% templatetag closeblock %}
     {% templatetag openblock %} if has_add_permission {% templatetag closeblock %}
-        <ul class="object-tools">
+        <ul class="grp-object-tools">
             {% templatetag openblock %} block object-tools-items {% templatetag closeblock %}
                 <li>
                     <a href="add/{% templatetag openblock %} if is_popup {% templatetag closeblock %}?_popup=1{% templatetag openblock %} endif {% templatetag closeblock %}" class="grp-add-link grp-state-focus">
@@ -370,7 +370,7 @@
 
 {% templatetag openblock %} block object-tools {% templatetag closeblock %}
     {% templatetag openblock %} if has_add_permission {% templatetag closeblock %}
-        <ul class="object-tools">
+        <ul class="grp-object-tools">
             {% templatetag openblock %} block object-tools-items {% templatetag closeblock %}
                 <li>
                     <a href="add/{% templatetag openblock %} if is_popup {% templatetag closeblock %}?_popup=1{% templatetag openblock %} endif {% templatetag closeblock %}" class="grp-add-link grp-state-focus">
