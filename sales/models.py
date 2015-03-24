@@ -72,7 +72,7 @@ class Purchase(models.Model):
         verbose_name  = 'Sale'
         unique_together = (("project", "project_lot"),)
     def __unicode__(self):        
-        return unicode(self.project) + ' '+ unicode(self.project_lot)
+        return 'purchase'
 
     def save(self):        
         self.modified_date = timezone.now()

@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('letter1', models.CharField(max_length=40, blank=True)),
                 ('letter2', models.CharField(max_length=40, blank=True)),
                 ('letter3', models.CharField(max_length=40, blank=True)),
-                ('modified_date', models.DateTimeField(default=datetime.datetime(2015, 3, 19, 0, 33, 26, 30000, tzinfo=utc), blank=True)),
+                ('modified_date', models.DateTimeField(default=datetime.datetime(2015, 3, 24, 6, 12, 58, 927000, tzinfo=utc), blank=True)),
                 ('lot_price', models.IntegerField(default=0, null=True)),
                 ('client', models.ForeignKey(to='config.Client', to_field=b'full_name')),
                 ('office', models.ForeignKey(to='config.Office')),

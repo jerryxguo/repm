@@ -27,6 +27,23 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='Notification',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('notify_type', models.CharField(default=b'NS', max_length=2, choices=[(b'NS', b'NOTIFY_CONSULTANT'), (b'NA', b'NOTIFY_ADMIN'), (b'NC', b'NOTIFY_CLIENT')])),
+                ('subject', models.CharField(max_length=100, null=True, blank=True)),
+                ('sender', models.CharField(max_length=100, null=True, blank=True)),
+                ('cc_list', models.CharField(max_length=500, null=True, blank=True)),
+                ('bcc_list', models.CharField(max_length=500, null=True, blank=True)),
+                ('template', models.FilePathField(path=b'C:\\workspace\\django\\open\\repm\\templates\\email')),
+            ],
+            options={
+                'verbose_name': 'Notify',
+                'verbose_name_plural': 'Notify',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Office',
             fields=[
                 ('city', models.CharField(max_length=20, unique=True, serialize=False, primary_key=True)),
@@ -89,7 +106,7 @@ class Migration(migrations.Migration):
                 ('full_name', models.CharField(max_length=30, unique=True, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=75)),
                 ('mobile', models.CharField(max_length=10)),
-                ('start_date', models.DateField(default=datetime.datetime(2015, 3, 19, 0, 33, 26, 26000, tzinfo=utc), null=True, blank=True)),
+                ('start_date', models.DateField(default=datetime.datetime(2015, 3, 24, 6, 12, 58, 923000, tzinfo=utc), null=True, blank=True)),
                 ('number_of_year_sales', models.IntegerField(default=0, null=True, blank=True)),
                 ('year_bonus', models.IntegerField(default=0, null=True, blank=True)),
                 ('number_of_sales', models.IntegerField(default=0, null=True, blank=True)),

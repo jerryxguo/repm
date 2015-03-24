@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-'''
+
 
 LOGGING = {
     'version': 1,
@@ -47,7 +47,6 @@ LOGGING = {
         },
     }
 }
-'''
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -155,7 +154,7 @@ STATIC_ROOT = 'C:/workspace/django/open/repm/static'
 #email settings
 EMAIL_HOST = 'mail.tpg.com.au'
 EMAIL_HOST_USER ='xguo10@tpg.com.au'
-EMAIL_HOST_PASSWORD = 'xguo2010'
+EMAIL_HOST_PASSWORD = 'xguo2000'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 

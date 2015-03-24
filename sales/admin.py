@@ -52,11 +52,13 @@ class PurchaseResource(resources.ModelResource):
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      
-    project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name'))    
+    project = fields.Field(column_name='project', attribute='project', widget=widgets.ForeignKeyWidget(Project,'name')) 
+    project_lot = fields.Field(column_name='project_lot', attribute='project_lot', widget=widgets.ForeignKeyWidget(Property,'lot'))
+    
     office = fields.Field(column_name='office', attribute='office', widget=widgets.ForeignKeyWidget(Office,'city'))
     sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
     client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
-   
+''' 
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
     def dehydrate_office(self, Purchase):
@@ -65,7 +67,16 @@ class PurchaseResource(resources.ModelResource):
         return unicode(Purchase.client) if Purchase.client else None
     def dehydrate_sales(self, Purchase):
         return unicode(Purchase.sales) if Purchase.sales else None
-
+    def dehydrate_project_lot(self, Purchase):
+        logger.debug('dehydrate_project_lot')
+        if Purchase.project_lot: 
+            logger.debug('Purchase.project_lot = %s', 'None')
+            logger.debug('Purchase.project_lot = %s', Purchase.project_lot)
+        else:
+            logger.debug('Purchase.project_lot = %s', 'None')
+        
+        return unicode(Purchase.project_lot) if Purchase.project_lot else None
+'''
 '''        
 class PurchaseAdminForm(forms.ModelForm):
     class Meta:
