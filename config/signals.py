@@ -33,8 +33,14 @@ def notify_sales_by_email(instance):
                 d = Context({ 'salesname': instance.sales.full_name,'project': instance.project,'lot': instance.project_lot })
                 text_content = plaintext.render(d)
                 
-                bcc_list = tuple(n.bcc_list.split(';')) if n.bcc_list else None
-                cc_list = tuple(n.cc_list.split(';')) if n.cc_list else None
+                if ';' in n.bcc_list:
+                    b = ';'               
+                elif ',' in n.bcc_list:
+                    b = ','
+                else:
+                    b = ' '
+                bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
+                cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None
                 logger.debug('bcc = %s cc_list %s', bcc_list,cc_list)
                 
                 send_mail(n.subject, text_content, n.sender,[instance.sales.email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)

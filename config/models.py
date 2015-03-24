@@ -187,10 +187,10 @@ class Notification(models.Model):
         ('NC', 'NOTIFY_CLIENT'),
     )
     notify_type = models.CharField(max_length=2, choices=NOTIFY_TYPE_CHOICES, default ='NS') 
-    subject = models.CharField(max_length=30, blank=True, null = True)
-    sender = models.CharField(max_length=30, blank=True, null = True)
-    cc_list = models.CharField(max_length=200, blank=True, null = True) 
-    bcc_list  = models.CharField(max_length=200, blank=True, null = True) 
+    subject = models.CharField(max_length=100, blank=True, null = True)
+    sender = models.CharField(max_length=100, blank=True, null = True)
+    cc_list = models.CharField(max_length=500, blank=True, null = True) 
+    bcc_list  = models.CharField(max_length=500, blank=True, null = True) 
 
     template = models.FilePathField(path=settings.TEMPLATE_DIRS[1])
     
