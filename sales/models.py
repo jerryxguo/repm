@@ -57,9 +57,9 @@ class Purchase(models.Model):
         return self.client.email 
     client_email = property(_get_client_email)
     note = models.CharField(max_length=100,blank=True)
-    letter1 = models.CharField(max_length=40,blank=True)
-    letter2 = models.CharField(max_length=40,blank=True)
-    letter3 = models.CharField(max_length=40,blank=True)
+    letter1 = models.BooleanField(default=False)
+    letter2 = models.BooleanField(default=False)
+    letter3 = models.BooleanField(default=False)
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
     
     lot_price = models.IntegerField(default=0, null=True)

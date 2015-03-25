@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -30,7 +30,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'import_export': {
+        'django': {
             'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
@@ -40,13 +40,14 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
-        'config': {
+        'smart_selects': {
             'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
         },
     }
 }
+'''
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

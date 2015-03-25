@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from import_export.admin import ImportExportModelAdmin
+
 from config.models import Project
 from config.models import Property
 from config.models import Client
@@ -83,7 +85,7 @@ admin.site.register(Property,PropertyAdmin)
 #########################################
 #client#       
 
-class ClientAdmin(admin.ModelAdmin):
+class ClientAdmin(ImportExportModelAdmin):
     
     fieldsets = [
         ('Client Info',    {'fields': (('full_name','email','mobile'),)}),

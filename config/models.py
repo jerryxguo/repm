@@ -90,8 +90,8 @@ class Client(models.Model):
     full_name = models.CharField(max_length=30, unique = True)
     number = models.IntegerField(default=0)
     
-    email = models.EmailField(blank=True, unique = True)
-    mobile = models.CharField(max_length=10,blank=True)
+    email = models.EmailField(max_length=50, blank=True,null=True)
+    mobile = models.CharField(max_length=10,blank=True,null=True)
    
     def _get_number_of_properties(self):        
         return self.number
