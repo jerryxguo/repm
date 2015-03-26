@@ -106,6 +106,24 @@ def update_property(instance):
     property = Property.objects.get(project=instance.project.name, lot= instance.project_lot.lot)
     property.lot_sales = instance.sales
     property.lot_client = instance.client
+    if instance.date_of_settlement:
+        property.modification_date = instance.date_of_settlement
+        property.status ='Property Settled'
+    elif instance.date_of_contract_unconditional:
+        property.modification_date = instance.date_of_contract_unconditional
+        property.status ='Contract Unconditional'
+    elif instance.date_of_contract_exchanged:
+        property.modification_date = instance.date_of_contract_exchanged
+        property.status ='Contract Exchanged'
+    elif instance.date_of_contract_signed:
+        property.modification_date = instance.date_of_contract_signed
+        property.status ='Contract Signed'
+    elif instance.date_of_contract_received:
+        property.modification_date = instance.date_of_contract_received
+        property.status ='Contract Received'  
+    else:
+        property.modification_date = None
+        property.status ='----'  
     property.save()
     
 def save_purchase(sender, instance, created, raw, using, update_fields, **kwargs):

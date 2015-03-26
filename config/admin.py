@@ -53,11 +53,11 @@ admin.site.register(Sales,SalesAdmin)
 
 class PropertyInline(admin.TabularInline):
     fieldsets = [
-        ('Property Info',    {'fields': (('project','lot','price','sales','client','status','status_date'),)}),       
+        ('Property Info',    {'fields': (('project','lot','price','sales','client','property_status','status_date'),)}),       
     ]
     model = Property
     extra = 0
-    readonly_fields = ('status_date','sales','client')    
+    readonly_fields = ('property_status','status_date','sales','client')    
 
 class ProjectAdmin(admin.ModelAdmin):
     

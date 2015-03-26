@@ -127,16 +127,11 @@ class Property(models.Model):
     def _get_client(self):
         return self.lot_client        
     client = property(_get_client)
-    
-    STATUS_CHOICES = (
-        ('--', '------'),
-        ('CR', 'Contract Received'),
-        ('CS', 'Contract Signed'),
-        ('CE', 'Contract Exchanged'),
-        ('CU', 'Contract Unconditional'),
-        ('PS', 'Property Settled'),
-    )
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default ='--')    
+        
+    status = models.CharField(max_length=20,default ='----')
+    def _get_property_status(self):        
+        return self.status
+    property_status = property(_get_property_status)    
     modification_date = models.DateField( blank=True, null = True)    
     def _get_date(self):        
         return self.modification_date
@@ -147,16 +142,8 @@ class Property(models.Model):
     class Meta:
         verbose_name_plural  = 'Properties'
         unique_together = (("project", "lot"),)
-    def __init__(self, *args, **kwargs):
-        super(Property, self).__init__(*args, **kwargs)
-        self.__original_status = self.status
-    def save(self):
-        logger.debug('self.status %s, self.__original_status = %s,', self.status, self.__original_status)   
-        if self.status != self.__original_status:
-            #logger.debug(' name changed - do something here')
-            self.modification_date = timezone.now()            
-            self.__original_status = self.status
-        super(Property, self).save()
+
+
         
 class Plan(models.Model):
     BONUS_TYPE_CHOICES = (
