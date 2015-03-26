@@ -112,6 +112,14 @@ class PurchaseAdmin(ImportExportModelAdmin):
     
     resource_class = PurchaseResource
 #    form = PurchaseAdminForm
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "office":
+            kwargs["queryset"] = Office.objects.order_by('city')
+        if db_field.name == "project":
+            kwargs["queryset"] = Project.objects.order_by('name')
+        if db_field.name == "client":
+            kwargs["queryset"] = Client.objects.order_by('full_name')        
+        return super(PurchaseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
      
 admin.site.register(Purchase,PurchaseAdmin)
 
