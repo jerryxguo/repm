@@ -25,7 +25,8 @@ def notify_sales_by_email(instance):
     logger.debug('notify_sales_by_email ')
     for n in notify:
         if n.notify_type=='NS':
-            if n.template and instance.sales.email:
+            receiver = n.receiver if n.receiver else instance.sales.email
+            if n.template and receiver:
                 
                 start = n.template.find('template')
                 plaintext = get_template(n.template[start+10:])
@@ -43,11 +44,8 @@ def notify_sales_by_email(instance):
                 cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None
                 logger.debug('bcc = %s cc_list %s', bcc_list,cc_list)
                 
-                send_mail(n.subject, text_content, n.sender,[instance.sales.email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
-            
-
-    
-   
+                send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+  
 # update sales's achievement
 def update_sales(instance):       
    
@@ -144,8 +142,10 @@ def letter_handler(sender, **kwargs):
     if sender == letter_1:
         logger.debug('sender = %s', 'letter_1')
         for n in notify:
+            
             if n.notify_type=='N1':
-                if n.template and email:
+                receiver = n.receiver if n.receiver else email
+                if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
@@ -160,16 +160,14 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
-            
-
-        
-        
+                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+               
     elif sender == letter_2:
         logger.debug('sender = %s', 'letter_2')
         for n in notify:
             if n.notify_type=='N2':
-                if n.template and email:
+                receiver = n.receiver if n.receiver else email
+                if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
@@ -184,13 +182,14 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
         
     elif sender == letter_3:
         logger.debug('sender = %s', 'letter_3')
         for n in notify:
             if n.notify_type=='N3':
-                if n.template and email:
+                receiver = n.receiver if n.receiver else email
+                if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
@@ -205,7 +204,7 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
  
 letter_1.connect(letter_handler, sender =letter_1)
 letter_2.connect(letter_handler, sender =letter_2)

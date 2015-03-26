@@ -193,7 +193,7 @@ class Notification(models.Model):
     sender = models.CharField(max_length=100, blank=True, null = True)
     cc_list = models.CharField(max_length=500, blank=True, null = True) 
     bcc_list  = models.CharField(max_length=500, blank=True, null = True) 
-
+    receiver = models.CharField(max_length=100, blank=True, null = True)
     template = models.FilePathField(path=settings.TEMPLATE_DIRS[1])
     
     class Meta:
