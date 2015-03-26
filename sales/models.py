@@ -9,7 +9,10 @@ from config.models import Property
 from config.models import Client
 from config.models import Sales
 from config.models import Office
-
+from django.dispatch import Signal
+letter_1 = Signal(providing_args=['client', 'email', 'consultant', 'phone', 'project','deposit'])
+letter_2 = Signal(providing_args=['client', 'email', 'exchange_date', 'project'])
+letter_3 = Signal(providing_args=['client', 'email', 'project'])
 
 import logging
 logger = logging.getLogger(__name__)
@@ -77,7 +80,17 @@ class Purchase(models.Model):
     def save(self):        
         self.modified_date = timezone.now()
         super(Purchase,self).save()
-    
+        if self.__original_letter_1 is False and self.letter1 is True:
+            letter_1.send(sender=letter_1, client=self.client.full_name, email = self.client.email,  consultant = self.sales.full_name, phone = self.sales.mobile, project =self.project.name,deposit = self.deposit)
+        if self.__original_letter_2 is False and self.letter2 is True:
+            letter_2.send(sender=letter_2, client=self.client.full_name, email = self.client.email,  exchange_date = self.date_of_contract_exchanged, project =self.project.name,)
+        if self.__original_letter_3 is False and self.letter3 is True:
+            letter_3.send(sender=letter_3, client=self.client.full_name, email = self.client.email,  project =self.project.name)
+        
+        self.__original_letter_1 = self.letter1
+        self.__original_letter_2 = self.letter2    
+        self.__original_letter_3 = self.letter3
+        
     def clean(self):       
         logger.debug('clean.office %s, self.sales = %s,', self.office.city, self.sales.full_name) 
         sales = Sales.objects.filter(office=self.office.city, full_name= self.sales.full_name)
@@ -90,3 +103,9 @@ class Purchase(models.Model):
             raise forms.ValidationError('Project:\''+self.project.name + '\' doesn\'t have the lot: '+ str(self.project_lot.lot) + '. Change project or lot selection please!')
         
         super(Purchase,self).clean() 
+
+    def __init__(self, *args, **kwargs):
+        super(Purchase, self).__init__(*args, **kwargs)    
+        self.__original_letter_1 = self.letter1
+        self.__original_letter_2 = self.letter2
+        self.__original_letter_3 = self.letter3

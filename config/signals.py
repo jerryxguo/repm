@@ -129,4 +129,84 @@ def delete_purchase(sender, instance, using, **kwargs):
 models.signals.post_save.connect(save_purchase, sender=Purchase)
 models.signals.post_delete.connect(delete_purchase, sender=Purchase)
 
+#####################################################################################365
+from sales.models import letter_1
+from sales.models import letter_2
+from sales.models import letter_3
 
+
+
+def letter_handler(sender, **kwargs):
+   
+    notify = Notification.objects.all()
+    email = kwargs['email']
+    logger.debug('email = %s', email if email else 'None')
+    if sender == letter_1:
+        logger.debug('sender = %s', 'letter_1')
+        for n in notify:
+            if n.notify_type=='N1':
+                if n.template and email:
+                    start = n.template.find('template')
+                    plaintext = get_template(n.template[start+10:])
+                    
+                    d = Context({ 'client': kwargs['client'],'project': kwargs['project'], 'consultant': kwargs['consultant'],'phone': kwargs['phone'], 'deposit': kwargs['deposit'] })
+                    text_content = plaintext.render(d)
+                    
+                    if ';' in n.bcc_list:
+                        b = ';'               
+                    elif ',' in n.bcc_list:
+                        b = ','
+                    else:
+                        b = ' '
+                    bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
+                    cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
+                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+            
+
+        
+        
+    elif sender == letter_2:
+        logger.debug('sender = %s', 'letter_2')
+        for n in notify:
+            if n.notify_type=='N2':
+                if n.template and email:
+                    start = n.template.find('template')
+                    plaintext = get_template(n.template[start+10:])
+                    
+                    d = Context({ 'client': kwargs['client'],'project': kwargs['project'], 'exchange_date': kwargs['exchange_date'] })
+                    text_content = plaintext.render(d)
+                    
+                    if ';' in n.bcc_list:
+                        b = ';'               
+                    elif ',' in n.bcc_list:
+                        b = ','
+                    else:
+                        b = ' '
+                    bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
+                    cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
+                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+        
+    elif sender == letter_3:
+        logger.debug('sender = %s', 'letter_3')
+        for n in notify:
+            if n.notify_type=='N3':
+                if n.template and email:
+                    start = n.template.find('template')
+                    plaintext = get_template(n.template[start+10:])
+                    
+                    d = Context({ 'client': kwargs['client'],'project': kwargs['project']})
+                    text_content = plaintext.render(d)
+                    
+                    if ';' in n.bcc_list:
+                        b = ';'               
+                    elif ',' in n.bcc_list:
+                        b = ','
+                    else:
+                        b = ' '
+                    bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
+                    cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
+                    send_mail(n.subject, text_content, n.sender,[email], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+ 
+letter_1.connect(letter_handler, sender =letter_1)
+letter_2.connect(letter_handler, sender =letter_2)
+letter_3.connect(letter_handler, sender =letter_3)

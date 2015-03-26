@@ -184,7 +184,9 @@ class Notification(models.Model):
     NOTIFY_TYPE_CHOICES = (
         ('NS', 'NOTIFY_CONSULTANT'),     
         ('NA', 'NOTIFY_ADMIN'),
-        ('NC', 'NOTIFY_CLIENT'),
+        ('N1', 'NOTIFY_CLIENT_LETTER_1'),
+        ('N2', 'NOTIFY_CLIENT_LETTER_2'),
+        ('N3', 'NOTIFY_CLIENT_LETTER_3'),
     )
     notify_type = models.CharField(max_length=2, choices=NOTIFY_TYPE_CHOICES, default ='NS') 
     subject = models.CharField(max_length=100, blank=True, null = True)
