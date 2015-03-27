@@ -18,7 +18,8 @@ class Office(models.Model):
     country = models.CharField(max_length=10, blank=True, null=True)
     phone = models.CharField('Contact Phone', max_length=10, blank=True, null=True)
     def __unicode__(self):
-        return self.city
+        return self.city if self.city is not None else 'None'
+            
     class Meta:
         verbose_name_plural  = 'Office'
 
@@ -68,7 +69,7 @@ class Sales(models.Model):
     
     referrer = models.CharField('Referer', max_length=30, blank=True, null=True)
     def __unicode__(self):
-        return self.full_name
+        return self.full_name if self.full_name is not None else 'None'
     class Meta:        
         verbose_name_plural  = 'Consultants'
         verbose_name  = 'Consultant:'
@@ -102,7 +103,7 @@ class Client(models.Model):
         verbose_name_plural  = 'Client'
         
     def __unicode__(self):
-        return self.full_name
+        return self.full_name if self.full_name is not None else 'None'
 
 class Project(models.Model):
     name = models.CharField(max_length=20, primary_key = True, unique = True)
@@ -111,7 +112,7 @@ class Project(models.Model):
     state = models.CharField(max_length=10, blank=True, null=True)
 
     def __unicode__(self):
-        return self.name
+        return self.name  if self.name is not None else 'None'
     class Meta:
         verbose_name_plural  = 'project'
         
@@ -138,7 +139,7 @@ class Property(models.Model):
         
     status_date = property(_get_date)
     def __unicode__(self):
-        return str(self.lot)
+        return str(self.lot) if self.lot is not None else 'None'
     class Meta:
         verbose_name_plural  = 'Properties'
         unique_together = (("project", "lot"),)

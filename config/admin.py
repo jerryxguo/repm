@@ -62,7 +62,7 @@ class PropertyInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Project', {'fields': (('name','address','city','state'),)}),
+        ('Project', {'fields': (('name'), ('address','city','state'),)}),
     ]
     list_display = ('name','address','city','state')
     inlines = [PropertyInline]
@@ -111,7 +111,7 @@ admin.site.register(Plan,PlanAdmin)
 class NotificationAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Notification Configuration',    {'fields': (('notify_type', 'subject', 'sender', 'receiver', 'cc_list', 'bcc_list', 'template'),)}),
+        ('Notification Configuration',    {'fields': (('notify_type'), ('subject', 'sender', 'receiver'), ('cc_list', 'bcc_list'), ('template'),)}),
        
     ]
     list_display = ('notify_type', 'subject', 'sender', 'receiver','cc_list', 'bcc_list', 'template')
