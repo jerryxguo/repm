@@ -49,6 +49,19 @@ class PurchaseResource(resources.ModelResource):
    
     class Meta:
         model = Purchase
+        widgets = {
+                'date_of_EOI_sent': {'format': '%d/%m/%Y'},
+                'date_of_contract_received': {'format': '%d/%m/%Y'},
+                'date_of_contract_signed': {'format': '%d/%m/%Y'},
+                'date_of_contract_exchanged': {'format': '%d/%m/%Y'},
+                'date_of_contract_unconditional': {'format': '%d/%m/%Y'},
+                'date_of_BOD_paid': {'format': '%d/%m/%Y'},
+                'date_of_settlement': {'format': '%d/%m/%Y'},
+                'commission_1_date': {'format': '%d/%m/%Y'},
+                'commission_2_date': {'format': '%d/%m/%Y'},
+                'tyler_commission_1_date': {'format': '%d/%m/%Y'},
+                'tyler_commission_2_date': {'format': '%d/%m/%Y'},
+                }
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      
