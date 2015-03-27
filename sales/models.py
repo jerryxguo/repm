@@ -23,7 +23,7 @@ class Purchase(models.Model):
    
     office = models.ForeignKey(Office)
     sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True)
-    client = models.ForeignKey(Client, to_field ='full_name')
+    client = models.ForeignKey(Client)
     deposit = models.IntegerField(default=0, null=True)
     solicitor = models.CharField(max_length=40,blank=True)
     date_of_EOI_sent = models.DateField( 'Date EOI Sent', blank=True, null = True)
@@ -79,6 +79,7 @@ class Purchase(models.Model):
 
     def save(self):        
         self.modified_date = timezone.now()
+        self.lot_price = self.project_lot.price
         super(Purchase,self).save()
         if self.__original_letter_1 is False and self.letter1 is True:
             letter_1.send(sender=letter_1, client=self.client.full_name, email = self.client.email,  consultant = self.sales.full_name, phone = self.sales.mobile, project =self.project.name,deposit = self.deposit)

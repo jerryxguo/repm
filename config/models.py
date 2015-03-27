@@ -87,7 +87,7 @@ class Sales(models.Model):
         super(Sales, self).save(*args, **kwargs)        
 '''            
 class Client(models.Model):
-    full_name = models.CharField(max_length=30, unique = True)
+    full_name = models.CharField(primary_key = True, max_length=30, unique = True)
     number = models.IntegerField(default=0)
     
     email = models.EmailField(max_length=50, blank=True,null=True)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from import_export.admin import ImportExportModelAdmin
+
 
 from config.models import Project
 from config.models import Property
@@ -85,7 +85,7 @@ admin.site.register(Property,PropertyAdmin)
 #########################################
 #client#       
 
-class ClientAdmin(ImportExportModelAdmin):
+class ClientAdmin(admin.ModelAdmin):
     
     fieldsets = [
         ('Client Info',    {'fields': (('full_name','email','mobile'),)}),
@@ -93,6 +93,7 @@ class ClientAdmin(ImportExportModelAdmin):
     ]
     readonly_fields = ('number_of_properties',)
     list_display = ('full_name','email','mobile','number_of_properties')
+
     
 admin.site.register(Client,ClientAdmin)
 
