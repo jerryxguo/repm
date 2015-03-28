@@ -258,12 +258,13 @@ class ExportMixin(ImportExportMixinBase):
         '''
         Returns model fields for export 
         '''
-        fields = self.model._meta.get_all_field_names()
-        exported = []
-        for f in fields:
-            if f.find('_id')<0:
-                exported.append(f)
-        return exported
+        field_names =[]
+        resource_class = self.get_export_resource_class()
+        fields = resource_class().get_fields()
+        for field in fields:
+        	field_names.append(resource_class().get_field_name(field))
+       
+        return field_names
         
     def get_export_filename(self, file_format):
         date_str = datetime.now().strftime('%Y-%m-%d')
@@ -296,12 +297,12 @@ class ExportMixin(ImportExportMixinBase):
         except AttributeError:
             return cl.query_set
 
-    def get_export_data(self, file_format,export_fields, queryset):
+    def get_export_data(self, file_format, queryset):
         """
         Returns file_format representation for given queryset.
         """
-        resource_class = self.get_export_resource_class()        
-        data = resource_class().export(queryset, export_fields)
+        resource_class = self.get_export_resource_class()
+        data = resource_class().export(queryset)
         export_data = file_format.export_data(data)
         return export_data
 
@@ -313,13 +314,9 @@ class ExportMixin(ImportExportMixinBase):
             file_format = formats[
                 int(form.cleaned_data['file_format'])
             ]()
-            export_fields = []
-            for i in form.cleaned_data['export_fields']:
-                export_fields.append(fields[int(i)])
-            
             
             queryset = self.get_export_queryset(request)
-            export_data = self.get_export_data(file_format, export_fields, queryset)
+            export_data = self.get_export_data(file_format, queryset)
             content_type = 'application/octet-stream'
             # Django 1.7 uses the content_type kwarg instead of mimetype
             try:
@@ -388,7 +385,7 @@ class ExportActionModelAdmin(ExportMixin, admin.ModelAdmin):
             formats = self.get_export_formats()
             file_format = formats[int(export_format)]()
 
-            export_data = self.get_export_data(file_format, None, queryset)
+            export_data = self.get_export_data(file_format, queryset)
             content_type = 'application/octet-stream'
             # Django 1.7 uses the content_type kwarg instead of mimetype
             try:

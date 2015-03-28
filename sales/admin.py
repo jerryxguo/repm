@@ -62,6 +62,11 @@ class PurchaseResource(resources.ModelResource):
                 'tyler_commission_1_date': {'format': '%d/%m/%Y'},
                 'tyler_commission_2_date': {'format': '%d/%m/%Y'},
                 }
+        export_order = ('id','office','sales', 'project','project_lot','lot_price','client','deposit','solicitor', \
+        'date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional',\
+        'date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1','commission_1_date', 'commission_2',\
+        'commission_2_date','tyler_commission_1','tyler_commission_1_date','tyler_commission_2','tyler_commission_2_date','bonus',\
+        'note','letter1','letter2','letter3')
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      

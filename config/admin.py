@@ -38,7 +38,11 @@ class SalesAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Sales Info',    {'fields': (('office','full_name'),('email','mobile',),('start_date','referrer'),('leader','director'))}),       
     ]
-    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "office":
+            kwargs["queryset"] = Office.objects.order_by('city')
+         
+        return super(SalesAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
    
     def get_model_perms(self, request):
         """
@@ -74,7 +78,12 @@ class PropertyAdmin(admin.ModelAdmin):
         ('Property Info',    {'fields': (('project','lot','price',),)}),       
     ]
     
-    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        
+        if db_field.name == "project":
+            kwargs["queryset"] = Project.objects.order_by('name')
+        return super(PropertyAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        
     def get_model_perms(self, request):
         """
         Return empty perms dict thus hiding the model from admin index.
