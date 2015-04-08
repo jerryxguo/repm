@@ -162,7 +162,8 @@ def letter_handler(sender, **kwargs):
         for n in notify:
             
             if n.notify_type=='N1':
-                receiver = n.receiver if n.receiver else email
+                receiver = n.receiver
+                ext = '['+ email+']' if email else '[]'
                 if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
@@ -178,13 +179,14 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
                
     elif sender == letter_2:
         logger.debug('sender = %s', 'letter_2')
         for n in notify:
             if n.notify_type=='N2':
-                receiver = n.receiver if n.receiver else email
+                receiver = n.receiver
+                ext = '['+ email+']' if email else '[]'
                 if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
@@ -200,13 +202,14 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
         
     elif sender == letter_3:
         logger.debug('sender = %s', 'letter_3')
         for n in notify:
             if n.notify_type=='N3':
-                receiver = n.receiver if n.receiver else email
+                receiver = n.receiver
+                ext = '['+ email+']' if email else '[]'
                 if n.template and receiver:
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
@@ -222,7 +225,7 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
  
 letter_1.connect(letter_handler, sender =letter_1)
 letter_2.connect(letter_handler, sender =letter_2)
