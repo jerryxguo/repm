@@ -24,7 +24,7 @@ class Purchase(models.Model):
     office = models.ForeignKey(Office)
     sales = ChainedForeignKey(Sales,chained_field="office",chained_model_field="office",  show_all=False, auto_choose=True)
     client = models.ForeignKey(Client)
-    deposit = models.IntegerField(default=0, null=True)
+    deposit = models.IntegerField(null=True,blank=True)
     solicitor = models.CharField(max_length=40,blank=True)
     date_of_EOI_sent = models.DateField( 'Date EOI Sent', blank=True, null = True)
     date_of_contract_received = models.DateField( blank=True, null = True)
@@ -33,9 +33,9 @@ class Purchase(models.Model):
     date_of_BOD_paid  = models.DateField( blank=True, null = True)
     date_of_contract_unconditional = models.DateField( blank=True, null = True)
     date_of_settlement = models.DateField( blank=True, null = True)
-    commission_1 = models.IntegerField(default=0, null = True,blank=True)
+    commission_1 = models.IntegerField( null = True,blank=True)
     commission_1_date = models.DateField( blank=True, null = True)
-    commission_2 = models.IntegerField(default=0,null = True,blank=True)
+    commission_2 = models.IntegerField(null = True,blank=True)
     commission_2_date = models.DateField( blank=True, null = True)
     def _get_commission_total(self):
         if self.commission_1 is None:
@@ -44,8 +44,8 @@ class Purchase(models.Model):
             self.commission_2 = 0
         return (self.commission_1 + self.commission_2)
     commission_total = property(_get_commission_total)
-    tyler_commission_1 = models.IntegerField(default=0,null = True,blank=True)
-    tyler_commission_2 = models.IntegerField(default=0,null = True,blank=True)
+    tyler_commission_1 = models.IntegerField(null = True,blank=True)
+    tyler_commission_2 = models.IntegerField(null = True,blank=True)
     tyler_commission_1_date = models.DateField( blank=True, null = True)
     tyler_commission_2_date = models.DateField( blank=True, null = True)
     def _get_tyler_commission_total(self):

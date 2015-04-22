@@ -15,11 +15,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Client',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('full_name', models.CharField(unique=True, max_length=30)),
+                ('full_name', models.CharField(max_length=80, unique=True, serialize=False, primary_key=True)),
                 ('number', models.IntegerField(default=0)),
                 ('email', models.EmailField(max_length=50, null=True, blank=True)),
-                ('mobile', models.CharField(max_length=10, null=True, blank=True)),
+                ('mobile', models.CharField(max_length=20, null=True, blank=True)),
             ],
             options={
                 'verbose_name_plural': 'Client',
@@ -35,7 +34,7 @@ class Migration(migrations.Migration):
                 ('sender', models.CharField(max_length=100, null=True, blank=True)),
                 ('cc_list', models.CharField(max_length=500, null=True, blank=True)),
                 ('bcc_list', models.CharField(max_length=500, null=True, blank=True)),
-                ('reciever', models.CharField(max_length=100, null=True, blank=True)),
+                ('receiver', models.CharField(max_length=100, null=True, blank=True)),
                 ('template', models.FilePathField(path=b'C:\\workspace\\django\\open\\repm\\templates\\email')),
             ],
             options={
@@ -47,7 +46,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Office',
             fields=[
-                ('city', models.CharField(max_length=20, unique=True, serialize=False, primary_key=True)),
+                ('city', models.CharField(max_length=40, unique=True, serialize=False, primary_key=True)),
                 ('independent', models.BooleanField(default=False)),
                 ('address', models.CharField(max_length=40, null=True, blank=True)),
                 ('country', models.CharField(max_length=10, null=True, blank=True)),
@@ -76,9 +75,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('name', models.CharField(max_length=20, unique=True, serialize=False, primary_key=True)),
-                ('address', models.CharField(max_length=40, null=True, blank=True)),
-                ('city', models.CharField(max_length=10, null=True, blank=True)),
+                ('name', models.CharField(max_length=60, unique=True, serialize=False, primary_key=True)),
+                ('address', models.CharField(max_length=100, null=True, blank=True)),
+                ('city', models.CharField(max_length=40, null=True, blank=True)),
                 ('state', models.CharField(max_length=10, null=True, blank=True)),
             ],
             options={
@@ -90,9 +89,9 @@ class Migration(migrations.Migration):
             name='Property',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('lot', models.IntegerField(default=0)),
-                ('price', models.IntegerField(default=0)),
-                ('status', models.CharField(default=b'--', max_length=2, choices=[(b'--', b'------'), (b'CR', b'Contract Received'), (b'CS', b'Contract Signed'), (b'CE', b'Contract Exchanged'), (b'CU', b'Contract Unconditional'), (b'PS', b'Property Settled')])),
+                ('lot', models.IntegerField()),
+                ('price', models.IntegerField()),
+                ('status', models.CharField(default=b'----', max_length=20)),
                 ('modification_date', models.DateField(null=True, blank=True)),
                 ('lot_client', models.ForeignKey(blank=True, to='config.Client', null=True)),
             ],
@@ -106,8 +105,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('full_name', models.CharField(max_length=30, unique=True, serialize=False, primary_key=True)),
                 ('email', models.EmailField(max_length=75)),
-                ('mobile', models.CharField(max_length=10)),
-                ('start_date', models.DateField(default=datetime.datetime(2015, 3, 26, 4, 24, 42, 305000, tzinfo=utc), null=True, blank=True)),
+                ('mobile', models.CharField(max_length=20)),
+                ('start_date', models.DateField(default=datetime.datetime(2015, 4, 22, 7, 20, 15, 351000, tzinfo=utc), null=True, blank=True)),
                 ('number_of_year_sales', models.IntegerField(default=0, null=True, blank=True)),
                 ('year_bonus', models.IntegerField(default=0, null=True, blank=True)),
                 ('number_of_sales', models.IntegerField(default=0, null=True, blank=True)),

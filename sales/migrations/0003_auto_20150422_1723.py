@@ -9,14 +9,14 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('config', '0001_initial'),
+        ('sales', '0002_auto_20150422_1720'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sales',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2015, 3, 26, 4, 24, 58, 378000, tzinfo=utc), null=True, blank=True),
+            model_name='purchase',
+            name='modified_date',
+            field=models.DateTimeField(default=datetime.datetime(2015, 4, 22, 7, 23, 21, 446000, tzinfo=utc), blank=True),
             preserve_default=True,
         ),
     ]

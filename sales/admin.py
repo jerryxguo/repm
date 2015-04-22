@@ -118,7 +118,7 @@ class PurchaseAdmin(ImportExportModelAdmin):
     fieldsets = [
         ('Sales Info',       {'fields': (('office','sales'),)}), 
         ('Property Info',    {'fields': (('project','project_lot',),)}),
-        ('Purchasing Info',  {'fields': (('client','client_email','deposit','solicitor'), ('date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional'),('date_of_EOI_sent','date_of_BOD_paid','date_of_settlement'),)}), 
+        ('Purchasing Info',  {'fields': (('client','client_email','deposit'),('solicitor'), ('date_of_EOI_sent','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged',),('date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement'),)}), 
         ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
         ('Others',      {'fields': (('note'),('letter1','letter2','letter3'),)}), 
         

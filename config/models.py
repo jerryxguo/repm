@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class Office(models.Model):
-    city = models.CharField(max_length=20, unique=True, primary_key = True)
+    city = models.CharField(max_length=40, unique=True, primary_key = True)
     independent = models.BooleanField(default=False)
     address = models.CharField(max_length=40, blank=True, null=True)   
     
@@ -29,7 +29,7 @@ class Sales(models.Model):
     full_name = models.CharField(max_length=30, unique=True, primary_key = True)
     
     email = models.EmailField()
-    mobile = models.CharField(max_length=10)
+    mobile = models.CharField(max_length=20)
     office = models.ForeignKey(Office)
     start_date = models.DateField(default =timezone.now(), blank=True, null = True)
     
@@ -88,11 +88,11 @@ class Sales(models.Model):
         super(Sales, self).save(*args, **kwargs)        
 '''            
 class Client(models.Model):
-    full_name = models.CharField(primary_key = True, max_length=30, unique = True)
+    full_name = models.CharField(primary_key = True, max_length=80, unique = True)
     number = models.IntegerField(default=0)
     
     email = models.EmailField(max_length=50, blank=True,null=True)
-    mobile = models.CharField(max_length=10,blank=True,null=True)
+    mobile = models.CharField(max_length=20,blank=True,null=True)
    
     def _get_number_of_properties(self):        
         return self.number
@@ -106,9 +106,9 @@ class Client(models.Model):
         return self.full_name if self.full_name is not None else 'None'
 
 class Project(models.Model):
-    name = models.CharField(max_length=20, primary_key = True, unique = True)
-    address = models.CharField(max_length=40, blank=True, null=True)
-    city = models.CharField(max_length=10, blank=True, null=True)
+    name = models.CharField(max_length=60, primary_key = True, unique = True)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=40, blank=True, null=True)
     state = models.CharField(max_length=10, blank=True, null=True)
 
     def __unicode__(self):
@@ -118,8 +118,8 @@ class Project(models.Model):
         
 class Property(models.Model):
     project = models.ForeignKey(Project)
-    lot = models.IntegerField(default=0)
-    price = models.IntegerField(default=0)
+    lot = models.CharField(max_length=10, blank=True, null=True)
+    price = models.IntegerField()
     lot_sales = models.ForeignKey(Sales, blank=True, null=True)
     lot_client = models.ForeignKey(Client, blank=True, null=True)
     def _get_sales(self):
