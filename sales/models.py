@@ -26,7 +26,7 @@ class Purchase(models.Model):
     client = models.ForeignKey(Client)
     deposit = models.IntegerField(null=True,blank=True)
     solicitor = models.CharField(max_length=40,blank=True)
-    date_of_EOI_sent = models.DateField( 'Date EOI Sent', blank=True, null = True)
+    date_of_EOI_sent = models.DateField( 'Date Of EOI Sent', blank=True, null = True)
     date_of_contract_received = models.DateField( blank=True, null = True)
     date_of_contract_signed = models.DateField( blank=True, null = True)
     date_of_contract_exchanged = models.DateField( blank=True, null = True)
@@ -61,8 +61,11 @@ class Purchase(models.Model):
     client_email = property(_get_client_email)
     note = models.CharField(max_length=100,blank=True)
     letter1 = models.BooleanField(default=False)
+    letter1_date = models.DateField('Sent Date', blank=True, null = True)
     letter2 = models.BooleanField(default=False)
+    letter2_date = models.DateField('Sent Date',  blank=True, null = True)
     letter3 = models.BooleanField(default=False)
+    letter3_date = models.DateField('Sent Date',  blank=True, null = True)
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
     
     lot_price = models.IntegerField(default=0, null=True)
@@ -94,12 +97,12 @@ class Purchase(models.Model):
         
     def clean(self):       
         logger.debug('clean.office %s, self.sales = %s,', self.office.city, self.sales.full_name) 
-        sales = Sales.objects.filter(office=self.office.city, full_name= self.sales.full_name)
+        sales = Sales.objects.filter(office=self.office, full_name= self.sales.full_name)
        
         if not sales:
             raise forms.ValidationError('Office:\''+ self.office.city + '\' doesn\'t have the sales named by: '+ self.sales.full_name + '. Change office or sales selection please!')
         
-        property = Property.objects.filter(project=self.project.name, lot= self.project_lot.lot)
+        property = Property.objects.filter(project=self.project, lot= self.project_lot.lot)
         if not property:
             raise forms.ValidationError('Project:\''+self.project.name + '\' doesn\'t have the lot: '+ str(self.project_lot.lot) + '. Change project or lot selection please!')
         

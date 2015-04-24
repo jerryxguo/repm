@@ -99,3 +99,15 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+sales/admin - import.py
+config/migrations/0001_initial.py
+config/migrations/0002_auto_20150424_1425.py
+config/migrations/0001_initial.py
+config/backup/admin.py_import_export
+log.txt
+sales/migrations/0001_initial.py
+sales/migrations/0002_auto_20150424_1425.py
+sales/migrations/0001_initial.py
+sales/migrations/0001_initial.py
+config/backup/db.sqlite3
+log.txt

@@ -31,7 +31,7 @@ def notify_sales_by_email(instance):
                 start = n.template.find('template')
                 plaintext = get_template(n.template[start+10:])
                 
-                d = Context({ 'salesname': instance.sales.full_name,'project': instance.project,'lot': instance.project_lot })
+                d = Context({ 'salesname': instance.sales.full_name,'project': instance.project.name,'lot': instance.project_lot.lot })
                 text_content = plaintext.render(d)
                 
                 if ';' in n.bcc_list:
@@ -103,7 +103,7 @@ def update_client(instance):
 def update_property(instance):
     
     #logger.debug('update_project %s propertys = %s type = %s, ', instance.project.name, instance.project_lot, type(instance.project_lot.lot))  
-    property = Property.objects.get(project=instance.project.name, lot= instance.project_lot.lot)
+    property = Property.objects.get(project=instance.project, lot= instance.project_lot.lot)
     property.lot_sales = instance.sales
     property.lot_client = instance.client
     if instance.date_of_settlement:

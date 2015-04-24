@@ -63,10 +63,10 @@ class PurchaseResource(resources.ModelResource):
                 'tyler_commission_2_date': {'format': '%d/%m/%Y'},
                 }
         export_order = ('id','office','sales', 'project','project_lot','lot_price','client','deposit','solicitor', \
-        'date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_contract_unconditional',\
-        'date_of_EOI_sent','date_of_BOD_paid','date_of_settlement','commission_1','commission_1_date', 'commission_2',\
+        'date_of_EOI_sent','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_BOD_paid','date_of_contract_unconditional',\
+        'date_of_settlement','commission_1','commission_1_date', 'commission_2',\
         'commission_2_date','tyler_commission_1','tyler_commission_1_date','tyler_commission_2','tyler_commission_2_date','bonus',\
-        'note','letter1','letter2','letter3')
+        'note','letter1','letter1_date','letter2','letter2_date','letter3', 'letter3_date')
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
      
@@ -76,25 +76,21 @@ class PurchaseResource(resources.ModelResource):
     office = fields.Field(column_name='office', attribute='office', widget=widgets.ForeignKeyWidget(Office,'city'))
     sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
     client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
-''' 
+    
+    # when primary key is id       
+
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
     def dehydrate_office(self, Purchase):
+        logger.debug('Purchase.office = %s',unicode(Purchase.office))
         return unicode(Purchase.office) if Purchase.office else None    
     def dehydrate_client(self, Purchase):
         return unicode(Purchase.client) if Purchase.client else None
     def dehydrate_sales(self, Purchase):
         return unicode(Purchase.sales) if Purchase.sales else None
     def dehydrate_project_lot(self, Purchase):
-        logger.debug('dehydrate_project_lot')
-        if Purchase.project_lot: 
-            logger.debug('Purchase.project_lot = %s', 'None')
-            logger.debug('Purchase.project_lot = %s', Purchase.project_lot)
-        else:
-            logger.debug('Purchase.project_lot = %s', 'None')
-        
         return unicode(Purchase.project_lot) if Purchase.project_lot else None
-'''
+
 '''        
 class PurchaseAdminForm(forms.ModelForm):
     class Meta:
@@ -120,7 +116,7 @@ class PurchaseAdmin(ImportExportModelAdmin):
         ('Property Info',    {'fields': (('project','project_lot',),)}),
         ('Purchasing Info',  {'fields': (('client','client_email','deposit'),('solicitor'), ('date_of_EOI_sent','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged',),('date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement'),)}), 
         ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
-        ('Others',      {'fields': (('note'),('letter1','letter2','letter3'),)}), 
+        ('Others',      {'fields': (('note'),('letter1','letter1_date'),('letter2','letter2_date'),('letter3', 'letter3_date'))}), 
         
     ]
     readonly_fields = ('client_email',)

@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class Office(models.Model):
-    city = models.CharField(max_length=40, unique=True, primary_key = True)
+    city = models.CharField(max_length=40, unique=True)
     independent = models.BooleanField(default=False)
     address = models.CharField(max_length=40, blank=True, null=True)   
     
@@ -26,7 +26,7 @@ class Office(models.Model):
         
 
 class Sales(models.Model):
-    full_name = models.CharField(max_length=30, unique=True, primary_key = True)
+    full_name = models.CharField(max_length=30, unique=True)
     
     email = models.EmailField()
     mobile = models.CharField(max_length=20)
@@ -88,7 +88,7 @@ class Sales(models.Model):
         super(Sales, self).save(*args, **kwargs)        
 '''            
 class Client(models.Model):
-    full_name = models.CharField(primary_key = True, max_length=80, unique = True)
+    full_name = models.CharField( max_length=80, unique = True)
     number = models.IntegerField(default=0)
     
     email = models.EmailField(max_length=50, blank=True,null=True)
@@ -106,7 +106,7 @@ class Client(models.Model):
         return self.full_name if self.full_name is not None else 'None'
 
 class Project(models.Model):
-    name = models.CharField(max_length=60, primary_key = True, unique = True)
+    name = models.CharField(max_length=60,  unique = True)
     address = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=40, blank=True, null=True)
     state = models.CharField(max_length=10, blank=True, null=True)
@@ -139,7 +139,7 @@ class Property(models.Model):
         
     status_date = property(_get_date)
     def __unicode__(self):
-        return str(self.lot) if self.lot is not None else 'None'
+        return self.lot if self.lot is not None else 'None'
     class Meta:
         verbose_name_plural  = 'Properties'
         unique_together = (("project", "lot"),)
