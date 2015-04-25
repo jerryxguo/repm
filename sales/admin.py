@@ -79,6 +79,7 @@ class PurchaseResource(resources.ModelResource):
     
        
 '''
+     ## when primary key is id, used to export field value 
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
     def dehydrate_office(self, Purchase):
