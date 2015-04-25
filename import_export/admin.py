@@ -297,12 +297,12 @@ class ExportMixin(ImportExportMixinBase):
         except AttributeError:
             return cl.query_set
 
-    def get_export_data(self, file_format, queryset):
+    def get_export_data(self, file_format, export_fields, queryset):
         """
         Returns file_format representation for given queryset.
         """
         resource_class = self.get_export_resource_class()
-        data = resource_class().export(queryset)
+        data = resource_class().export(queryset, export_fields)
         export_data = file_format.export_data(data)
         return export_data
 
@@ -314,9 +314,12 @@ class ExportMixin(ImportExportMixinBase):
             file_format = formats[
                 int(form.cleaned_data['file_format'])
             ]()
-            
+            export_fields = []
+            for i in form.cleaned_data['export_fields']:
+                export_fields.append(fields[int(i)])
+                
             queryset = self.get_export_queryset(request)
-            export_data = self.get_export_data(file_format, queryset)
+            export_data = self.get_export_data(file_format, export_fields,  queryset)
             content_type = 'application/octet-stream'
             # Django 1.7 uses the content_type kwarg instead of mimetype
             try:
@@ -385,7 +388,7 @@ class ExportActionModelAdmin(ExportMixin, admin.ModelAdmin):
             formats = self.get_export_formats()
             file_format = formats[int(export_format)]()
 
-            export_data = self.get_export_data(file_format, queryset)
+            export_data = self.get_export_data(file_format, None, queryset)
             content_type = 'application/octet-stream'
             # Django 1.7 uses the content_type kwarg instead of mimetype
             try:

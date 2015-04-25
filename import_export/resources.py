@@ -127,11 +127,11 @@ class Resource(six.with_metaclass(DeclarativeMetaclass)):
         else:
             return self._meta.use_transactions
 
-    def get_fields(self):
+    def get_fields(self, export_fields = None):
         """
         Returns fields in ``export_order`` order.
         """
-        return [self.fields[f] for f in self.get_export_order()]
+        return [self.fields[f] for f in self.get_export_order(export_fields)]
 
     @classmethod
     def get_field_name(cls, field):
@@ -370,8 +370,8 @@ class Resource(six.with_metaclass(DeclarativeMetaclass)):
 
         return result
 
-    def get_export_order(self):
-        return self._meta.export_order or self.fields.keys()
+    def get_export_order(self, export_fields):
+        return export_fields or self._meta.export_order or self.fields.keys()
 
     def export_field(self, field, obj):
         field_name = self.get_field_name(field)
@@ -380,20 +380,20 @@ class Resource(six.with_metaclass(DeclarativeMetaclass)):
             return method(obj)
         return field.export(obj)
 
-    def export_resource(self, obj):
-        return [self.export_field(field, obj) for field in self.get_fields()]
+    def export_resource(self, obj, export_fields = None):
+         return [self.export_field(field, obj) for field in self.get_fields(export_fields)]
 
-    def get_export_headers(self):
-        headers = [force_text(field.column_name) for field in self.get_fields()]
-        return headers
+    def get_export_headers(self, export_fields = None):
+        return [force_text(field.column_name) for field in self.get_fields(export_fields)]
+      
 
-    def export(self, queryset=None):
+    def export(self, queryset=None, fields = None):
         """
         Exports a resource.
         """
         if queryset is None:
             queryset = self.get_queryset()
-        headers = self.get_export_headers()
+        headers = self.get_export_headers(fields)
         data = tablib.Dataset(headers=headers)
 
         if isinstance(queryset, QuerySet):
@@ -403,7 +403,7 @@ class Resource(six.with_metaclass(DeclarativeMetaclass)):
         else:
             iterable = queryset
         for obj in iterable:
-            data.append(self.export_resource(obj))
+            data.append(self.export_resource(obj,fields))
         return data
 
 
