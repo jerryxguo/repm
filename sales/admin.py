@@ -77,8 +77,8 @@ class PurchaseResource(resources.ModelResource):
     sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
     client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
     
-    # when primary key is id       
-
+       
+'''
     def dehydrate_project(self, Purchase):
         return unicode(Purchase.project) if Purchase.project else None
     def dehydrate_office(self, Purchase):
@@ -90,7 +90,7 @@ class PurchaseResource(resources.ModelResource):
         return unicode(Purchase.sales) if Purchase.sales else None
     def dehydrate_project_lot(self, Purchase):
         return unicode(Purchase.project_lot) if Purchase.project_lot else None
-
+'''
 '''        
 class PurchaseAdminForm(forms.ModelForm):
     class Meta:
