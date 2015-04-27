@@ -183,7 +183,7 @@ class Notification(models.Model):
     bcc_list  = models.CharField(max_length=500, blank=True, null = True) 
     receiver = models.CharField(max_length=100, blank=True, null = True)
     template = models.FilePathField(path=settings.TEMPLATE_DIRS[1])
-    reminder_within_days = models.IntegerField( default = 0)
+    reminder_within_days = models.IntegerField( 'remind within days', default = 0)
     
     class Meta:
         verbose_name_plural  = 'Notify'
