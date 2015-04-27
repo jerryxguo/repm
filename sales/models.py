@@ -10,9 +10,9 @@ from config.models import Client
 from config.models import Sales
 from config.models import Office
 from django.dispatch import Signal
-letter_1 = Signal(providing_args=['client', 'email', 'consultant', 'phone', 'project','deposit'])
-letter_2 = Signal(providing_args=['client', 'email', 'exchange_date', 'project'])
-letter_3 = Signal(providing_args=['client', 'email', 'project'])
+letter_1 = Signal(providing_args=[ 'uId', 'date'])
+letter_2 = Signal(providing_args=[ 'uId', 'date'])
+letter_3 = Signal(providing_args=[ 'uId', 'date'])
 
 import logging
 logger = logging.getLogger(__name__)
@@ -84,12 +84,14 @@ class Purchase(models.Model):
         self.modified_date = timezone.now()
         self.lot_price = self.project_lot.price
         super(Purchase,self).save()
-        if self.__original_letter_1 is False and self.letter1 is True:
-            letter_1.send(sender=letter_1, client=self.client.full_name, email = self.client.email,  consultant = self.sales.full_name, phone = self.sales.mobile, project =self.project.name,deposit = self.deposit)
-        if self.__original_letter_2 is False and self.letter2 is True:
-            letter_2.send(sender=letter_2, client=self.client.full_name, email = self.client.email,  exchange_date = self.date_of_contract_exchanged, project =self.project.name,)
-        if self.__original_letter_3 is False and self.letter3 is True:
-            letter_3.send(sender=letter_3, client=self.client.full_name, email = self.client.email,  project =self.project.name)
+        if (self.__original_letter_1 is False or self.date_of_EOI_sent!=self.__original_EOI_date) and self.letter1 is True and self.date_of_EOI_sent is not None:
+            letter_1.send(sender=letter_1, uId=self.id,  date = self.date_of_EOI_sent)
+        if (self.__original_letter_2 is False or self.date_of_contract_exchanged!=self.__original_exchange_date) and self.letter2 is True and self.date_of_contract_exchanged is not None:
+            logger.debug('send %s', 'letter_2')   
+            letter_2.send(sender=letter_2, uId=self.id,  date = self.date_of_contract_exchanged)
+        if (self.__original_letter_3 is False or self.date_of_settlement!=self.__original_settlement_date) and self.letter3 is True and self.date_of_settlement is not None:
+            logger.debug('send %s', 'letter_3')   
+            letter_3.send(sender=letter_3, uId=self.id,  date = self.date_of_settlement)
         
         self.__original_letter_1 = self.letter1
         self.__original_letter_2 = self.letter2    
@@ -113,3 +115,6 @@ class Purchase(models.Model):
         self.__original_letter_1 = self.letter1
         self.__original_letter_2 = self.letter2
         self.__original_letter_3 = self.letter3
+        self.__original_EOI_date = self.date_of_EOI_sent
+        self.__original_exchange_date = self.date_of_contract_exchanged
+        self.__original_settlement_date = self.date_of_settlement

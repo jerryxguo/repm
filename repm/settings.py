@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -40,14 +40,14 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
-        'smart_selects': {
+        'background_task': {
             'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
         },
     }
 }
-
+'''
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'daterange_filter',
     'asyn_mail',
+    'background_task',
     
 )
 

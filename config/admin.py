@@ -120,9 +120,9 @@ admin.site.register(Plan,PlanAdmin)
 class NotificationAdmin(admin.ModelAdmin):
     
     fieldsets = [
-        ('Notification Configuration',    {'fields': (('notify_type'), ('subject', 'sender', 'receiver'), ('cc_list', 'bcc_list'), ('template'),)}),
+        ('Notification Configuration',    {'fields': (('notify_type'), ('subject', 'sender', 'receiver'), ('cc_list', 'bcc_list'), ('template','reminder_within_days'),)}),
        
     ]
-    list_display = ('notify_type', 'subject', 'sender', 'receiver','cc_list', 'bcc_list', 'template')
+    list_display = ('notify_type', 'subject', 'sender', 'receiver','cc_list', 'bcc_list', 'template','reminder_within_days')
     
 admin.site.register(Notification,NotificationAdmin)

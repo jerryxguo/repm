@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime, timedelta
+from django.utils import timezone
 from django.db import models
 from django.core.exceptions import ValidationError
 from config.models import Sales
@@ -12,6 +13,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 
+
 if "asyn_mail" in settings.INSTALLED_APPS:
     from asyn_mail import send_mail
 else:
@@ -20,6 +22,7 @@ else:
 import logging
 logger = logging.getLogger(__name__)
 
+    
 def notify_sales_by_email(instance):
     notify = Notification.objects.all()
     logger.debug('notify_sales_by_email ')
@@ -149,18 +152,21 @@ models.signals.post_delete.connect(delete_purchase, sender=Purchase)
 from sales.models import letter_1
 from sales.models import letter_2
 from sales.models import letter_3
+from background_task import background
 
-
-
-def letter_handler(sender, **kwargs):
-   
+@background(schedule=60)
+def notify_user(sender, uId):
     notify = Notification.objects.all()
-    email = kwargs['email']
-    logger.debug('email = %s', email if email else 'None')
-    if sender == letter_1:
+    p = Purchase.objects.get(id = uId)
+    if p is None:
+        return
+        
+    email = p.client.email
+    logger.debug('notify_user '+ str(uId))
+    if sender == 'letter1' and p.letter1_date is None:
         logger.debug('sender = %s', 'letter_1')
-        for n in notify:
-            
+        
+        for n in notify:            
             if n.notify_type=='N1':
                 receiver = n.receiver
                 ext = '['+ email+']' if email else '[]'
@@ -168,7 +174,7 @@ def letter_handler(sender, **kwargs):
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
-                    d = Context({ 'client': kwargs['client'],'project': kwargs['project'], 'consultant': kwargs['consultant'],'phone': kwargs['phone'], 'deposit': kwargs['deposit'] })
+                    d = Context({ 'client': p.client.full_name,'project': p.project.name, 'consultant': p.sales.full_name,'phone': p.sales.mobile, 'deposit': p.deposit })
                     text_content = plaintext.render(d)
                     
                     if ';' in n.bcc_list:
@@ -179,9 +185,9 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail('Reminder: send [' + n.subject+'] to ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
                
-    elif sender == letter_2:
+    elif sender == 'letter2' and p.letter2_date is None:
         logger.debug('sender = %s', 'letter_2')
         for n in notify:
             if n.notify_type=='N2':
@@ -191,7 +197,7 @@ def letter_handler(sender, **kwargs):
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
-                    d = Context({ 'client': kwargs['client'],'project': kwargs['project'], 'exchange_date': kwargs['exchange_date'] })
+                    d = Context({ 'client':  p.client.full_name,'project': p.project.name, 'exchange_date': p.date_of_contract_exchanged })
                     text_content = plaintext.render(d)
                     
                     if ';' in n.bcc_list:
@@ -202,9 +208,9 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail('Reminder: send [' + n.subject+'] to ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
         
-    elif sender == letter_3:
+    elif sender == 'letter3' and p.letter3_date is None:
         logger.debug('sender = %s', 'letter_3')
         for n in notify:
             if n.notify_type=='N3':
@@ -214,7 +220,7 @@ def letter_handler(sender, **kwargs):
                     start = n.template.find('template')
                     plaintext = get_template(n.template[start+10:])
                     
-                    d = Context({ 'client': kwargs['client'],'project': kwargs['project']})
+                    d = Context({ 'client':  p.client.full_name,'project': p.project.name})
                     text_content = plaintext.render(d)
                     
                     if ';' in n.bcc_list:
@@ -225,7 +231,36 @@ def letter_handler(sender, **kwargs):
                         b = ' '
                     bcc_list = tuple(n.bcc_list.split(b)) if n.bcc_list else None
                     cc_list = tuple(n.cc_list.split(b)) if n.cc_list else None                   
-                    send_mail(n.subject+' ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+                    send_mail('Reminder: send [' + n.subject+'] to ' + ext, text_content, n.sender,[receiver], fail_silently=False, bcc=bcc_list, cc=cc_list, html=None)
+
+def letter_handler(sender, **kwargs):
+    notify = Notification.objects.all()
+    date = None
+    send = None
+    if sender == letter_1:
+        logger.debug('sender = %s', 'letter_1')   
+        send = 'letter1'
+        for n in notify:            
+            if n.notify_type=='N1':
+                date = kwargs['date'] + +timedelta(days=n.reminder_within_days)    
+    elif sender == letter_2:
+        send = 'letter2'
+        logger.debug('sender = %s', 'letter_2')
+        for n in notify:
+            if n.notify_type=='N2':
+                date = kwargs['date'] + +timedelta(days=n.reminder_within_days)        
+    elif sender == letter_3:
+        send = 'letter3'
+        logger.debug('sender = %s', 'letter_3')
+        for n in notify:
+            if n.notify_type=='N3':
+               date = kwargs['date'] + +timedelta(days=n.reminder_within_days)
+               
+    if date is not None:    
+        time = datetime( date.year, date.month, date.day, 0,  0,  0)
+        notify_user(send, kwargs['uId'], schedule=time)
+    
+    
  
 letter_1.connect(letter_handler, sender =letter_1)
 letter_2.connect(letter_handler, sender =letter_2)
