@@ -66,6 +66,7 @@ class Purchase(models.Model):
     letter2_date = models.DateField('Sent Date',  blank=True, null = True)
     letter3 = models.BooleanField(default=False)
     letter3_date = models.DateField('Sent Date',  blank=True, null = True)
+    withdrawal = models.BooleanField(default=False)
     modified_date = models.DateTimeField(default =timezone.now(), blank=True)
     
     lot_price = models.IntegerField(default=0, null=True)

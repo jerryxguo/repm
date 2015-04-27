@@ -154,9 +154,9 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'tem
 STATIC_ROOT = 'C:/workspace/django/open/repm/static'
 
 #email settings
-EMAIL_HOST = 'mail.tpg.com.au'
-EMAIL_HOST_USER ='xguo10@tpg.com.au'
-EMAIL_HOST_PASSWORD = 'xguo20100'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='investspring@gmail.com'
+EMAIL_HOST_PASSWORD = 'sydneyspring'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
