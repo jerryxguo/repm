@@ -62,6 +62,7 @@ class PurchaseResource(resources.ModelResource):
                 'tyler_comm_1_invoice_date': {'format': '%d/%m/%Y'},
                 'tyler_comm_2_invoice_date': {'format': '%d/%m/%Y'},
                 }
+        export_order = ('project','project_lot','client','office','sales', 'deposit','lot_price','date_of_EOI_sent','solicitor', \
         'date_of_contract_received','date_of_contract_signed','date_of_BOD_paid','date_of_contract_unconditional','date_of_contract_exchanged',\
         'date_of_settlement','commission_1','comm_1_invoice_date', 'commission_2',\
         'comm_2_invoice_date','tyler_commission_1','tyler_comm_1_invoice_date','tyler_commission_2','tyler_comm_2_invoice_date','bonus',\
