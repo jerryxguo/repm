@@ -116,3 +116,6 @@ config/migrations/0003_auto_20150424_1850.py
 sales/migrations/0002_auto_20150424_1748.py
 sales/migrations/0003_auto_20150424_1850.py
 log.txt
+db - Copy.sqlite3
+sales/migrations/0002_auto_20150512_0922.py
+config/migrations/0002_auto_20150512_0922.py

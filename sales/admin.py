@@ -57,15 +57,14 @@ class PurchaseResource(resources.ModelResource):
                 'date_of_contract_unconditional': {'format': '%d/%m/%Y'},
                 'date_of_BOD_paid': {'format': '%d/%m/%Y'},
                 'date_of_settlement': {'format': '%d/%m/%Y'},
-                'commission_1_date': {'format': '%d/%m/%Y'},
-                'commission_2_date': {'format': '%d/%m/%Y'},
-                'tyler_commission_1_date': {'format': '%d/%m/%Y'},
-                'tyler_commission_2_date': {'format': '%d/%m/%Y'},
+                'comm_1_invoice_date': {'format': '%d/%m/%Y'},
+                'comm_2_invoice_date': {'format': '%d/%m/%Y'},
+                'tyler_comm_1_invoice_date': {'format': '%d/%m/%Y'},
+                'tyler_comm_2_invoice_date': {'format': '%d/%m/%Y'},
                 }
-        export_order = ('id','office','sales', 'project','project_lot','lot_price','client','deposit','solicitor', \
-        'date_of_EOI_sent','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged','date_of_BOD_paid','date_of_contract_unconditional',\
-        'date_of_settlement','commission_1','commission_1_date', 'commission_2',\
-        'commission_2_date','tyler_commission_1','tyler_commission_1_date','tyler_commission_2','tyler_commission_2_date','bonus',\
+        'date_of_contract_received','date_of_contract_signed','date_of_BOD_paid','date_of_contract_unconditional','date_of_contract_exchanged',\
+        'date_of_settlement','commission_1','comm_1_invoice_date', 'commission_2',\
+        'comm_2_invoice_date','tyler_commission_1','tyler_comm_1_invoice_date','tyler_commission_2','tyler_comm_2_invoice_date','bonus',\
         'note','letter1','letter1_date','letter2','letter2_date','letter3', 'letter3_date' ,'withdrawal')
         #fields = ('id', 'project', 'office','client', 'sales')
         #exclude = ['tyler_commission_1', 'tyler_commission_2', 'commission_1', 'commission_2']
@@ -77,7 +76,27 @@ class PurchaseResource(resources.ModelResource):
     sales = fields.Field(column_name='sales', attribute='sales', widget=widgets.ForeignKeyWidget(Sales,'full_name'))
     client = fields.Field(column_name='client', attribute='client', widget=widgets.ForeignKeyWidget(Client,'full_name'))
     
-       
+    def dehydrate_letter1(self, Purchase):
+        if Purchase.letter1:
+            return 'Yes'
+        else:
+            return ''
+        
+    def dehydrate_letter2(self, Purchase):
+        if Purchase.letter2:
+            return 'Yes'
+        else:
+            return ''
+    def dehydrate_letter3(self, Purchase):
+        if Purchase.letter3:
+            return 'Yes'
+        else:
+            return ''
+    def dehydrate_withdrawal(self, Purchase):
+        if Purchase.withdrawal:
+            return 'Yes'
+        else:
+            return ''        
 '''
      ## when primary key is id, used to export field value 
     def dehydrate_project(self, Purchase):
@@ -116,12 +135,12 @@ class PurchaseAdmin(ImportExportModelAdmin):
         ('Sales Info',       {'fields': (('office','sales'),)}), 
         ('Property Info',    {'fields': (('project','project_lot',),)}),
         ('Purchasing Info',  {'fields': (('client','client_email','deposit'),('solicitor'), ('date_of_EOI_sent','date_of_contract_received','date_of_contract_signed','date_of_contract_exchanged',),('date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement'),)}), 
-        ('Commission Info',  {'fields': (('commission_1','commission_1_date'), ('commission_2','commission_2_date'),('tyler_commission_1','tyler_commission_1_date'),('tyler_commission_2','tyler_commission_2_date'),('bonus',))}), 
+        ('Commission Info',  {'fields': (('commission_1','comm_1_invoice_date'), ('commission_2','comm_2_invoice_date'),('tyler_commission_1','tyler_comm_1_invoice_date'),('tyler_commission_2','tyler_comm_2_invoice_date'),('bonus',))}), 
         ('Status',      {'fields': ( ('withdrawal'),)}), 
         ('Others',      {'fields': (('note'),('letter1','letter1_date'),('letter2','letter2_date'),('letter3', 'letter3_date'), )}), 
     ]
     readonly_fields = ('client_email',)
-    list_display = ('project', 'project_lot', 'price', 'office','sales', 'client', 'client_email','deposit','solicitor','date_of_EOI_sent','date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement','note','withdrawal')
+    list_display = ('project', 'project_lot', 'client', 'office','sales',  'deposit','price','solicitor','date_of_EOI_sent','date_of_BOD_paid','date_of_contract_unconditional','date_of_settlement', 'client_email','note','withdrawal')
     list_filter = ['project','office','sales','withdrawal',('date_of_contract_received',DateRangeFilter), ('date_of_contract_signed', DateRangeFilter),('date_of_contract_exchanged', DateRangeFilter),('date_of_contract_unconditional', DateRangeFilter),('date_of_settlement', DateRangeFilter),('date_of_EOI_sent', DateRangeFilter)]
     search_fields = ['project__name','sales__full_name', 'client__full_name', 'office__city']
     
