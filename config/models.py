@@ -101,6 +101,7 @@ class Client(models.Model):
 
     class Meta:
         verbose_name_plural  = 'Client'
+        ordering = ['full_name',]
         
     def __unicode__(self):
         return self.full_name if self.full_name is not None else 'None'
@@ -144,7 +145,7 @@ class Property(models.Model):
     class Meta:
         verbose_name_plural  = 'Properties'
         unique_together = (("project", "lot"),)
-
+        ordering = ['lot',]
 
         
 class Plan(models.Model):
