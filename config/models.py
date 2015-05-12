@@ -22,7 +22,7 @@ class Office(models.Model):
             
     class Meta:
         verbose_name_plural  = 'Office'
-
+        ordering = ['city',]
         
 
 class Sales(models.Model):
@@ -74,7 +74,7 @@ class Sales(models.Model):
         verbose_name_plural  = 'Consultants'
         verbose_name  = 'Consultant:'
         unique_together = (("office", "full_name"),)
-
+        ordering = ['full_name',]
 '''   
     def save(self, *args, **kwargs):
         if self.leader is True:
@@ -114,7 +114,8 @@ class Project(models.Model):
     def __unicode__(self):
         return self.name  if self.name is not None else 'None'
     class Meta:
-        verbose_name_plural  = 'project'
+        verbose_name_plural  = 'project'       
+        ordering = ['name',]
         
 class Property(models.Model):
     project = models.ForeignKey(Project)
